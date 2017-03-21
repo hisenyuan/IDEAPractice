@@ -14,6 +14,7 @@ public class Log4jDemo {
         logger.debug("这是debug信息");
         // 记录info级别的信息
         logger.info("这是info信息");
+        logger.info("这里做了一个XX操作，入库，做操作日志");
         // 记录error级别的信息
         logger.error("这是error信息");
         hisen();
