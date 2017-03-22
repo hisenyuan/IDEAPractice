@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * Created by hisenyuan on 2017/3/21 at 15:09.
- */
+
 public class ObjectsTest {
     public static void main(String[] args) {
         Student obj_01 = new Student("zhangsan", 30);
@@ -68,3 +68,4 @@ public class ObjectsTest {
         System.out.println("12. Objects.toString----->" + Objects.toString(obj_12, "234") + "<----->" + Objects.toString(null, "234"));
     }
 }
+ */
