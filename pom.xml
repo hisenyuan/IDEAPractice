@@ -29,6 +29,25 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.2</version>
         </dependency>
+        <!-- JSONLib 包 -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <!--阿里巴巴fastjson包-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+        <!--mysql数据库链接驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-Java</artifactId>
+            <version>5.1.38</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
     <build>
         <finalName>IDEAPractice</finalName>
