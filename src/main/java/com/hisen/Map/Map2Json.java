@@ -21,13 +21,13 @@ public class Map2Json {
         map.put("phone","15555555555");
         JSONObject jsonObject = JSONObject.fromObject(map);
         System.out.println(jsonObject);
-        hisen();
+        fastjson();
     }
 
     /**
      * 阿里巴巴的fastjson把map转换成json
      */
-    public static void hisen() {
+    public static void fastjson() {
         Map<String,String> map = new HashMap<String, String>();
         map.put("name","hisen");
         map.put("age","20");
