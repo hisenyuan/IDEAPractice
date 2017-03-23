@@ -1,6 +1,7 @@
 package com.hisen.fastjson.test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.hisen.fastjson.bean.Group;
 import com.hisen.fastjson.bean.User;
 
@@ -49,5 +50,14 @@ public class Test {
         for (User u : group.getUsers()) {
             System.out.println(u.getId() +":"+u.getName());
         }
+    }
+
+    /**
+     * 把字符串格式的json转换为json对象，取出数据
+     */
+    public static void string2Json() {
+        String s = "{'A':'a'}";
+        JSONObject obj= JSON.parseObject(s);
+        System.out.println(obj.get("A"));
     }
 }
