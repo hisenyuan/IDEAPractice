@@ -48,6 +48,16 @@
             <version>5.1.38</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>nl.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.2.4</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>IDEAPractice</finalName>

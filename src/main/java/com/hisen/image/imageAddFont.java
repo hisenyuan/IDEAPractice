@@ -31,10 +31,10 @@ public class imageAddFont {
             BufferedImage buffImg = jpegDecoder.decodeAsBufferedImage();//解码当前JPEG数据流，返回BufferedImage对象
             Graphics g = buffImg.getGraphics();//得到画笔对象
             g.setColor(Color.BLACK);//设置颜色。
-            Font f = new Font("宋体", Font.PLAIN,75);
+            Font f = new Font("宋体", Font.PLAIN,25);
             g.setColor(Color.blue);//或者括号写：new Color(0, 0, 255)
             g.setFont(f);
-            g.drawString(font,100,135);//10,20 表示这段文字在图片上的位置(x,y) .第一个是你设置的内容。
+            g.drawString(font,10,900);//10,20 表示这段文字在图片上的位置(x,y) .第一个是你设置的内容。
             g.dispose();
             String shareFileName = "\\c:\\1\\" + System.currentTimeMillis() + ".jpg";//加工后的图片输出路径
             OutputStream os = new FileOutputStream(shareFileName);

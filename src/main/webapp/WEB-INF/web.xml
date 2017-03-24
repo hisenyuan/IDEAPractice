@@ -3,5 +3,15 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name></display-name>
+  <servlet>
+    <servlet-name>addFont</servlet-name>//要与下面的名称相同
+    <servlet-class>com.hisen.image.controller.addFont</servlet-class>//调用的类的位置
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>addFont</servlet-name>
+    <url-pattern>/hello.do</url-pattern>//url标识
+  </servlet-mapping>
+
 </web-app>
