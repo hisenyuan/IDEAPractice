@@ -32,14 +32,12 @@ public class imageAddFont {
             Graphics g = buffImg.getGraphics();//得到画笔对象
             g.setColor(Color.BLACK);//设置颜色。
             Font f = new Font("宋体", Font.PLAIN,75);
-            Color mycolor = Color.blue;//new Color(0, 0, 255);
-            g.setColor(mycolor);
+            g.setColor(Color.blue);//或者括号写：new Color(0, 0, 255)
             g.setFont(f);
             g.drawString(font,100,135);//10,20 表示这段文字在图片上的位置(x,y) .第一个是你设置的内容。
             g.dispose();
-            OutputStream os;
             String shareFileName = "\\c:\\1\\" + System.currentTimeMillis() + ".jpg";//加工后的图片输出路径
-            os = new FileOutputStream(shareFileName);
+            OutputStream os = new FileOutputStream(shareFileName);
             JPEGImageEncoder en = JPEGCodec.createJPEGEncoder(os); //创键编码器，用于编码内存中的图象数据。
             en.encode(buffImg);
             is.close();
