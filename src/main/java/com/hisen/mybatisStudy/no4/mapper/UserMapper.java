@@ -1,6 +1,8 @@
 package com.hisen.mybatisStudy.no4.mapper;
 
 import com.hisen.mybatisStudy.po.User;
+import com.hisen.mybatisStudy.po.UserCustom;
+import com.hisen.mybatisStudy.po.UserQueryVo;
 
 import java.util.List;
 
@@ -22,4 +24,7 @@ public interface UserMapper {
 
     //更新用户
     public void updateUser(User user)throws Exception;
+
+    //用户信息综合查询
+    public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
 }

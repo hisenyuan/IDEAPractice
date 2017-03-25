@@ -1,6 +1,8 @@
 package com.hisen.mybatisStudy.no4.mapper;
 
 import com.hisen.mybatisStudy.po.User;
+import com.hisen.mybatisStudy.po.UserCustom;
+import com.hisen.mybatisStudy.po.UserQueryVo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by hisen on 17-3-25.
@@ -39,5 +42,22 @@ public class UserMapperTest {
         User user=userMapper.findUserById(1);
 
         System.out.println(user.getUsername());
+    }
+    //用户信息的综合 查询
+    @Test
+    public void testFindUserList() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //创建UserMapper对象，mybatis自动生成mapper代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //创建包装对象，设置查询条件
+        UserQueryVo userQueryVo = new UserQueryVo();
+        UserCustom userCustom = new UserCustom();
+        //由于这里使用动态sql，如果不设置某个值，条件不会拼接在sql中
+        userCustom.setSex("1");
+        userCustom.setUsername("张三");
+        userQueryVo.setUserCustom(userCustom);
+        //调用userMapper的方法
+        List<UserCustom> list = userMapper.findUserList(userQueryVo);
+        System.out.println(list);
     }
 }

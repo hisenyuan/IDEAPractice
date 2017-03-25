@@ -82,5 +82,12 @@
         update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address}
         where id=#{id}
     </update>
-
+    <!-- 用户信息综合查询
+           #{userCustom.sex}:取出pojo包装对象中性别值
+           ${userCustom.username}：取出pojo包装对象中用户名称
+        -->
+    <select id="findUserList" parameterType="com.hisen.mybatisStudy.po.UserQueryVo"
+            resultType="com.hisen.mybatisStudy.po.UserCustom">
+        SELECT * FROM user WHERE user.sex=#{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'
+    </select>
 </mapper>
