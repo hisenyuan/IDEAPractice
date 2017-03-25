@@ -60,4 +60,31 @@ public class UserMapperTest {
         List<UserCustom> list = userMapper.findUserList(userQueryVo);
         System.out.println(list);
     }
+    //用户信息综合查询总数
+    @Test
+    public void testFindUserCount() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //创建UserMapper对象，mybatis自动生成mapper代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //创建包装对象，设置查询条件
+        UserQueryVo userQueryVo = new UserQueryVo();
+        UserCustom userCustom = new UserCustom();
+        //由于这里使用动态sql，如果不设置某个值，条件不会拼接在sql中
+        userCustom.setSex("1");
+        userCustom.setUsername("小");
+        userQueryVo.setUserCustom(userCustom);
+        //调用userMapper的方法
+        int count = userMapper.findUserCount(userQueryVo);
+        System.out.println(count);
+
+    }
+    @Test
+    public void testFindUserByIdResultMap() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //创建UserMapper对象，mybatis自动生成mapper代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //调用userMapper的方法
+        User user = userMapper.findUserByIdResultMap(1);
+        System.out.println(user);
+    }
 }
