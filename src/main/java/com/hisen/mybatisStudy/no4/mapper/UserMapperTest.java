@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,5 +87,47 @@ public class UserMapperTest {
         //调用userMapper的方法
         User user = userMapper.findUserByIdResultMap(1);
         System.out.println(user);
+    }
+
+    //用户信息的综合 查询 - 带判断条件
+    @Test
+    public void testFindUserList_if() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //创建UserMapper对象，mybatis自动生成mapper代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //创建包装对象，设置查询条件
+        UserQueryVo userQueryVo = new UserQueryVo();
+        UserCustom userCustom = new UserCustom();
+        //由于这里使用动态sql，如果不设置某个值，条件不会拼接在sql中
+        userCustom.setSex("1");
+        //userCustom.setUsername("张三");
+        //注释了username字段，sql里面就判断了：SELECT * FROM user WHERE user.sex=? AND user.username LIKE '%%'
+        userQueryVo.setUserCustom(userCustom);
+
+        //调用userMapper的方法(传进去一个对象，在sql语句里面获取字段)
+        //List<UserCustom> list = userMapper.findUserList(userQueryVo);
+
+        List<UserCustom> list = userMapper.findUserList_if(null);
+        //SELECT * FROM user 如果传入的对象为空，where条件没了
+        System.out.println(list);
+    }
+
+    //用户信息的综合 查询 - SQL片段
+    @Test
+    public void testFindUserList_one() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //创建UserMapper对象，mybatis自动生成mapper代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //创建包装对象，设置查询条件
+        UserQueryVo userQueryVo = new UserQueryVo();
+        //传入多个id
+        List<Integer> ids = new ArrayList<Integer>();
+        ids.add(1);
+        ids.add(10);
+        ids.add(16);
+        userQueryVo.setIds(ids);
+        //调用userMapper的方法(传进去一个对象，在sql语句里面获取字段)
+        List<UserCustom> list = userMapper.findUserList_one(userQueryVo);
+        System.out.println(list);
     }
 }

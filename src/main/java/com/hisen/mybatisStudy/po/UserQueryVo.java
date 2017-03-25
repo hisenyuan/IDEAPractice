@@ -1,5 +1,7 @@
 package com.hisen.mybatisStudy.po;
 
+import java.util.List;
+
 /**
  * Created by hisen on 17-3-25.
  */
@@ -19,4 +21,14 @@ public class UserQueryVo {
 
     //可以包装其它的查询条件，订单、商品
     //....
+    //传入多个id
+    private List<Integer> ids;
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
+    }
 }

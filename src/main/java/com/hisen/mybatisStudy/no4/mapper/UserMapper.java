@@ -34,6 +34,14 @@ public interface UserMapper {
     //根据id查询用户信息，使用resultMap输出
     public User findUserByIdResultMap(int id) throws Exception;
 
+    //用户信息综合查询 - 带判断条件
+    public List<UserCustom> findUserList_if(UserQueryVo userQueryVo) throws Exception;
+
+    //用户信息综合查询总数 - 带判断条件
+    public int findUserCount_if(UserQueryVo userQueryVo) throws Exception;
+
+    //用户信息综合查询 - foreach
+    public List<UserCustom> findUserList_one(UserQueryVo userQueryVo) throws Exception;
 
 
 }

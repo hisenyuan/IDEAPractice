@@ -129,4 +129,79 @@
     <select id="findUserByIdResultMap" parameterType="int" resultMap="userResultMap">
         SELECT id id_,username username_ FROM user WHERE id=#{value}
     </select>
+
+    <!-- 用户信息综合查询
+    #{userCustom.sex}:取出pojo包装对象中性别值
+    ${userCustom.username}：取出pojo包装对象中用户名称
+ -->
+    <select id="findUserList_if" parameterType="com.hisen.mybatisStudy.po.UserQueryVo"
+            resultType="com.hisen.mybatisStudy.po.UserCustom">
+        SELECT * FROM user
+        <!--  where 可以自动去掉条件中的第一个and -->
+        <where>
+            <if test="userCustom!=null">
+                <if test="userCustom.sex!=null and userCustom.sex != '' ">
+                    AND user.sex=#{userCustom.sex}
+                </if>
+                <if test="userCustom.username!=null and userCustom.username != '' ">
+                    AND user.username LIKE '%${userCustom.username}%'
+                </if>
+            </if>
+        </where>
+    </select>
+    <!-- 用户信息综合查询总数
+        parameterType：指定输入类型和findUserList一样
+        resultType：输出结果类型
+    -->
+    <select id="findUserCount_if" parameterType="com.hisen.mybatisStudy.po.UserQueryVo" resultType="int">
+        SELECT count(*) FROM user
+        <where>
+            <if test="userCustom!=null">
+                <if test="userCustom.sex!=null and userCustom.sex != '' ">
+                    AND user.sex=#{userCustom.sex}
+                </if>
+                <if test="userCustom.username!=null and userCustom.username != '' ">
+                    AND user.username LIKE '%${userCustom.username}%'
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <sql id="query_user_where_one">
+        <if test="ids!=null">
+            <!-- 使用 foreach遍历传入ids
+            collection：指定输入 对象中集合属性
+            item：每个遍历生成对象中
+            open：开始遍历时拼接的串
+            close：结束遍历时拼接的串
+            separator：遍历的两个对象中需要拼接的串
+             -->
+            <!-- 使用实现下边的sql拼接：
+             AND (id=1 OR id=10 OR id=16)
+             -->
+            <foreach collection="ids" item="user_id" open="AND (" close=")" separator="or">
+                <!-- 每个遍历需要拼接的串 -->
+                id=#{user_id}
+            </foreach>
+
+            <!-- 实现  “ and id IN(1,10,16)”拼接 -->
+            <!-- <foreach collection="ids" item="user_id" open="and id IN(" close=")" separator=",">
+                每个遍历需要拼接的串
+                #{user_id}
+            </foreach> -->
+
+        </if>
+    </sql>
+    <select id="findUserList_one" parameterType="com.hisen.mybatisStudy.po.UserQueryVo"
+            resultType="com.hisen.mybatisStudy.po.UserCustom">
+        SELECT * FROM user
+        <!--  where 可以自动去掉条件中的第一个and -->
+        <where>
+            <!-- 引用sql片段 的id，如果refid指定的id不在本mapper文件中，需要前边加namespace -->
+            <include refid="query_user_where_one"></include>
+            <!-- 在这里还要引用其它的sql片段  -->
+        </where>
+    </select>
+
+
 </mapper>
