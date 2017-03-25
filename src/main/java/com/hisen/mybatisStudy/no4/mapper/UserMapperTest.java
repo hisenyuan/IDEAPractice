@@ -56,7 +56,7 @@ public class UserMapperTest {
         userCustom.setSex("1");
         userCustom.setUsername("张三");
         userQueryVo.setUserCustom(userCustom);
-        //调用userMapper的方法
+        //调用userMapper的方法(传进去一个对象，在sql语句里面获取字段)
         List<UserCustom> list = userMapper.findUserList(userQueryVo);
         System.out.println(list);
     }
