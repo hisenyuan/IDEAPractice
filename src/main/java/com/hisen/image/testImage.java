@@ -17,7 +17,7 @@ import java.io.*;
  */
 public class testImage {
     public static void main(String[] args) {
-        imageAddFont("黄琅么么哒~","c:/1/830.jpg");
+        imageAddFont("~","c:/1/830.jpg");
     }
     public static void exportImg1(){
         int width = 100;
@@ -51,7 +51,6 @@ public class testImage {
         try {
             //1.jpg是你的 主图片的路径
             InputStream is = new FileInputStream("c:/1/830.jpg");
-
             //通过JPEG图象流创建JPEG数据流解码器
             JPEGImageDecoder jpegDecoder = JPEGCodec.createJPEGDecoder(is);
             //解码当前JPEG数据流，返回BufferedImage对象
