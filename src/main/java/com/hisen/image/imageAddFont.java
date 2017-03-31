@@ -8,6 +8,8 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 给图片加上文字
@@ -32,11 +34,13 @@ public class imageAddFont {
             Graphics g = buffImg.getGraphics();//得到画笔对象
             g.setColor(Color.BLACK);//设置颜色。
             Font f = new Font("宋体", Font.PLAIN,25);
-            g.setColor(Color.blue);//或者括号写：new Color(0, 0, 255)
+            g.setColor(new Color(50, 130, 160));//或者括号写：new Color(50, 130, 160) 或者 Color.blue
             g.setFont(f);
             g.drawString(font,10,900);//10,20 表示这段文字在图片上的位置(x,y) .第一个是你设置的内容。
             g.dispose();
-            String shareFileName = "\\c:\\1\\" + System.currentTimeMillis() + ".jpg";//加工后的图片输出路径
+            int random=(new java.util.Random()).nextInt(); //随机数
+            String format = (new SimpleDateFormat("yyyyMMdd_HHmmss")).format(new Date());//格式化时间
+            String shareFileName = "\\c:\\1\\" + format + random + ".jpg";//加工后的图片输出路径
             OutputStream os = new FileOutputStream(shareFileName);
             JPEGImageEncoder en = JPEGCodec.createJPEGEncoder(os); //创键编码器，用于编码内存中的图象数据。
             en.encode(buffImg);
