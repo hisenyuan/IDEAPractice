@@ -33,13 +33,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="book" items="${requestScope.get('book')}" varStatus="status">
                     <tr>
-                        <td>${book.bookId}</td>
-                        <td>${book.name}</td>
-                        <td>${book.number}</td>
+                        <td>${requestScope.get('book').bookId}</td>
+                        <td>${requestScope.get('book').name}</td>
+                        <td>${requestScope.get('book').number}</td>
                     </tr>
-                </c:forEach>
                 </tbody>
             </table>
         </div>
