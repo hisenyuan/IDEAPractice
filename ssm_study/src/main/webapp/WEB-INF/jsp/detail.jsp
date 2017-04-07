@@ -27,7 +27,8 @@
         <div class="col-md-12 column">
             <ul class="nav nav-tabs">
                 <li><a href="/ssm/book/list">首页</a></li>
-                <li><a href="/ssm/book/1003/detail">图书具体信息</a></li>
+                <li class="active"><a href="/ssm/book/1003/detail">图书具体信息</a></li>
+                <li><a href="/ssm/add.jsp">添加图书信息</a></li>
                 <li class="disabled"><a href="#">信息</a></li>
             </ul>
         </div>

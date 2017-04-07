@@ -9,7 +9,7 @@
 <% String appPath = request.getContextPath() + "/"; %>
 <html>
 <head>
-    <title>图书列表</title>
+    <title>添加图书</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- 引入 Bootstrap -->
@@ -27,8 +27,9 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#">首页</a></li>
+                <li><a href="/ssm/book/list">首页</a></li>
                 <li><a href="/ssm/book/1003/detail">图书具体信息</a></li>
+                <li class="active"><a href="/ssm/add.jsp">添加图书信息</a></li>
                 <li class="disabled"><a href="#">信息</a></li>
             </ul>
         </div>
@@ -94,7 +95,7 @@
       type: frm.attr('method'),
       url: frm.attr('action'),
       data: frm.serialize(),
-      success: function (data) {
+      success:function(data) {
           alert("添加成功");
       },
       error:function(data){
