@@ -75,4 +75,12 @@ public class BookController {
     return new Result<AppointExecution>(true, execution);
   }
 
+  @RequestMapping(value = "/add", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+  @ResponseBody
+  private String add(Book book) {
+    System.out.println(book.toString());
+    String s = book.toString();
+    return s;
+  }
+
 }

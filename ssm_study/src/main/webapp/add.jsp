@@ -1,16 +1,17 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2017/4/6
-  Time: 20:10
-  note: 使用bootstrap输出后台返回的requestScope对象
+  Date: 2017/4/7
+  Time: 18:52
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String appPath = request.getContextPath() + "/"; %>
 <html>
 <head>
     <title>图书列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- 引入 Bootstrap -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -37,51 +38,69 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    图书列表 <small>显示当前图书库存信息</small>
+                    图书列表
+                    <small>显示当前图书库存信息</small>
                 </h1>
             </div>
         </div>
     </div>
+
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <table class="table table-hover table-striped">
-                <thead>
-                <tr>
-                    <th>图书编号</th>
-                    <th>图书名字</th>
-                    <th>图书数量</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="book" items="${requestScope.get('list')}" varStatus="status">
-                    <tr>
-                        <td>${book.bookId}</td>
-                        <td>${book.name}</td>
-                        <td>${book.number}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+            <form role="form" id="add" method="post" action="http://localhost:8848/ssm/book/add" accept-charset="utf-8">
+                <div class="form-group">
+                    <label>图书ID</label><input class="form-control" name="bookId"/>
+                </div>
+                <div class="form-group">
+                    <label>图书名字</label><input class="form-control" name="name"/>
+                </div>
+                <div class="form-group">
+                    <label>图书数量</label><input class="form-control" name="number"/>
+                </div>
+                <button class="btn btn-default" id="sub">Submit</button>
+            </form>
         </div>
     </div>
+
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
+                </button>
                 <h4>
                     注意!
-                </h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
+                </h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a
+                    href="#" class="alert-link">alert link</a>
             </div>
         </div>
     </div>
     <div id="footer">
         <div class="container">
-            <p class="muted credit">powered by <a href="http://hisen.me">HiSEN</a> and <a href="http://hisen.me">A.L</a>.</p>
+            <p class="muted credit">powered by <a href="http://hisen.me">HiSEN</a> and <a
+                    href="http://hisen.me">A.L</a>.</p>
         </div>
     </div>
 </div>
 
 <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
 <script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+  var frm = $('#add');
+  frm.submit(function (ev) {
+    $.ajax({
+      type: frm.attr('method'),
+      url: frm.attr('action'),
+      data: frm.serialize(),
+      success: function (data) {
+        if(data!=null)
+          alert(data.toJSON());
+      },
+      error:function(data){
+        alert(data);
+      }
+    });
+    ev.preventDefault();
+  });
+</script>
 </body>
 </html>

@@ -22,6 +22,26 @@
 </head>
 <body>
 <div class="container">
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs">
+                <li><a href="/ssm/book/list">首页</a></li>
+                <li><a href="/ssm/book/1003/detail">图书具体信息</a></li>
+                <li class="disabled"><a href="#">信息</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    图书详情 <small>显示当前图书详细信息</small>
+                </h1>
+            </div>
+        </div>
+    </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <table class="table table-hover table-striped">
@@ -41,6 +61,25 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4>
+                    注意!
+                </h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="container">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="navbar-inner navbar-content-center">
+                <p class="text-muted credit" style="padding: 10px;">
+                    Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.
+                </p>
+            </div>
+        </nav>
     </div>
 </div>
 
