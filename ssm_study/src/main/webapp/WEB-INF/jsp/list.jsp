@@ -74,10 +74,14 @@
             </div>
         </div>
     </div>
-    <div id="footer">
-        <div class="container">
-            <p class="muted credit">powered by <a href="http://hisen.me">HiSEN</a> and <a href="http://hisen.me">A.L</a>.</p>
-        </div>
+    <div id="footer" class="container">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="navbar-inner navbar-content-center">
+                <p class="text-muted credit" style="padding: 10px;">
+                    <p class="muted credit">powered by <a href="http://hisen.me">HiSEN</a> and <a href="http://hisen.me">A.L</a>.</p>
+                </p>
+            </div>
+        </nav>
     </div>
 </div>
 

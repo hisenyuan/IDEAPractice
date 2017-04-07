@@ -1,3 +1,4 @@
+/*
 package com.hisen.image.controller;
 
 import com.hisen.image.imageAddFont;
@@ -14,9 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-/**
- * Created by hisenyuan on 2017/3/24 at 19:16.
- */
+
+
 
 public class addFont extends HttpServlet {
     imageAddFont addFont = new imageAddFont();
@@ -53,3 +53,4 @@ public class addFont extends HttpServlet {
         doGet(request,response);
     }
 }
+ */

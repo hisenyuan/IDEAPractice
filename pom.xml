@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.4.2</version>
+            <version>3.3.0</version>
         </dependency>
         <!--阿里巴巴fastjson包-->
         <dependency>
@@ -135,7 +135,6 @@
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
         </dependency>
-
     </dependencies>
 
 
