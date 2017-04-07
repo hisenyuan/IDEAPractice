@@ -35,4 +35,9 @@
     book_id = #{bookId}
     AND number > 0
   </update>
+
+  <insert id="addBook">
+    INSERT INTO book(`book_id`, `name`, `number`)
+    VALUES(#{bookId}, #{name}, #{number})
+  </insert>
 </mapper>

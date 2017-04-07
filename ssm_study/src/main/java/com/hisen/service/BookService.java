@@ -34,4 +34,12 @@ public interface BookService {
    */
   AppointExecution appoint(long bookId, long studentId);
 
+  /**
+   * 添加图书
+   *
+   * @param book
+   * @return
+   */
+  int addBook(Book book);
+
 }

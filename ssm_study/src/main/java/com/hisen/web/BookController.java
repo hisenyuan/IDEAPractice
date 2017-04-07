@@ -75,12 +75,20 @@ public class BookController {
     return new Result<AppointExecution>(true, execution);
   }
 
-  @RequestMapping(value = "/add", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+  //加上这个解决乱码问题
+  // 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
+  // 当返回为json的时候：produces = "application/json; charset=utf-8"
+  @RequestMapping(value = "/add", method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
   @ResponseBody
   private String add(Book book) {
-    System.out.println(book.toString());
     String s = book.toString();
-    return s;
+    System.out.println(s);
+    Book hasBook = bookService.getById(book.getBookId());
+    int i = -2;
+    if (hasBook == null) {
+      i = bookService.addBook(book);
+    }
+    return i>0?"success":"error";
   }
 
 }

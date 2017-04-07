@@ -38,8 +38,8 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    图书列表
-                    <small>显示当前图书库存信息</small>
+                    添加图书
+                    <small>增加图书信息</small>
                 </h1>
             </div>
         </div>
@@ -74,11 +74,14 @@
             </div>
         </div>
     </div>
-    <div id="footer">
-        <div class="container">
-            <p class="muted credit">powered by <a href="http://hisen.me">HiSEN</a> and <a
-                    href="http://hisen.me">A.L</a>.</p>
-        </div>
+    <div id="footer" class="container">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="navbar-inner navbar-content-center">
+                <p class="text-muted credit" style="padding: 10px;">
+                <p class="muted credit">powered by <a href="http://hisen.me">HiSEN</a> and <a href="http://hisen.me">A.L</a>.</p>
+                </p>
+            </div>
+        </nav>
     </div>
 </div>
 
@@ -92,11 +95,10 @@
       url: frm.attr('action'),
       data: frm.serialize(),
       success: function (data) {
-        if(data!=null)
-          alert(data.toJSON());
+          alert("添加成功");
       },
       error:function(data){
-        alert(data);
+          alert("添加失败");
       }
     });
     ev.preventDefault();
