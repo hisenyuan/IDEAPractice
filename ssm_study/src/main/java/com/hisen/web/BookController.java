@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by hisenyuan on 2017/4/6 at 17:27.
- * 在項目終端Terminal可以測試：curl -H "Accept:application/json; charset=utf-8" -D "studentId=1234567890" 127.0.0.1:8848/ssm/book/1003/appoint
+ * Created by hisenyuan on 2017/4/6 at 17:27. 在項目終端Terminal可以測試：curl -H "Accept:application/json;
+ * charset=utf-8" -D "studentId=1234567890" 127.0.0.1:8848/ssm/book/1003/appoint
  */
 @Controller
 @RequestMapping("/book") // url:/模块/资源/{id}/细分 /seckill/list
@@ -55,9 +55,10 @@ public class BookController {
 
   //ajax json
   @RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
-      "application/json; charset=utf-8" })
+      "application/json; charset=utf-8"})
   @ResponseBody
-  private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId, @RequestParam("studentId") Long studentId) {
+  private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId,
+      @RequestParam("studentId") Long studentId) {
     if (studentId == null || studentId.equals("")) {
       return new Result<>(false, "学号不能为空");
     }
@@ -78,7 +79,7 @@ public class BookController {
   //加上这个解决乱码问题
   // 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
   // 当返回为json的时候：produces = "application/json; charset=utf-8"
-  @RequestMapping(value = "/add", method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
+  @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
   @ResponseBody
   private String add(Book book) {
     String s = book.toString();
@@ -88,7 +89,6 @@ public class BookController {
     if (hasBook == null) {
       i = bookService.addBook(book);
     }
-    return i>0?"success":"error";
+    return i > 0 ? "success" : "error";
   }
-
 }
