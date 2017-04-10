@@ -1,4 +1,4 @@
-package com.hisen.Jredis;
+package com.hisen.Jedis;
 
 import java.util.HashMap;
 import java.util.Map;
