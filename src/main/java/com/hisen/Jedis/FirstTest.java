@@ -12,7 +12,7 @@ import redis.clients.jedis.Jedis;
 public class FirstTest {
 
   @Test
-  public static void testClient() {
+  public void testClient() {
     Jedis jedis = new Jedis("127.0.0.1", 6379);
     jedis.select(2); //切换Redis数据库
     jedis.set("firstJedis", "hello,Jedis"); //与Redis命令行操作基本一致
