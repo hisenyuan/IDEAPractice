@@ -8,7 +8,9 @@ idea上的一些练习
 
 # ssm_study
 开发工具：IntelliJ IDEA
+
 maven：3.3.9
+
 jdk：1.8
 
 这个项目只是一个简单的搭建SSM框架
