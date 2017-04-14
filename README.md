@@ -19,6 +19,8 @@ Mybatis：3.3.0
 
 这个项目只是一个简单的搭建SSM框架
 
+建表语句在resources/mapper/下
+
 实现了CRUD,jsp页面是用了下bootstrap
 
 # 个人渣渣博客
