@@ -7,6 +7,7 @@ package com.hisen.designpattern.simplefactory;
 public class OpreationSimpleFactory {
 
   public static Opreation createOperate(String operate) {
+    //下面用到了多态
     Opreation opreation = null;
     switch (operate) {
       case "+":
