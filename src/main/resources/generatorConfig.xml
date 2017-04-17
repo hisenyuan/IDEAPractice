@@ -8,18 +8,18 @@
     <context id="mysqlgenerator" targetRuntime="MyBatis3">
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/ssm"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/employees"
                         userId="root"
                         password="hisen" />
 
-        <javaModelGenerator targetPackage="com.hisen.mybatis.model" targetProject="src/main/java" />
+        <javaModelGenerator targetPackage="com.hisen.mybatis.unionselecttest.model" targetProject="src/main/java" />
 
-        <sqlMapGenerator targetPackage="com.hisen.mybatis.mapper" targetProject="src/main/resources" />
+        <sqlMapGenerator targetPackage="unionselecttest" targetProject="src/main/resources" />
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hisen.mybatis.mapper" targetProject="src/main/java" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hisen.mybatis.unionselecttest.mapper" targetProject="src/main/java" />
 
-        <table tableName="appointment"/>
-        <table tableName="book"/>
+        <table tableName="employees"/>
+        <table tableName="salaries"/>
 
     </context>
 
