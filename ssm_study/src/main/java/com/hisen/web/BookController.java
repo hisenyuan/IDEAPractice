@@ -40,7 +40,7 @@ public class BookController {
     return "list";// WEB-INF/jsp/"list".jsp
   }
 
-  @RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
+  @RequestMapping(value = "/detail/{bookId}", method = RequestMethod.GET)
   private String detail(@PathVariable("bookId") Long bookId, Model model) {
     if (bookId == null) {
       return "redirect:/book/list";
@@ -54,13 +54,18 @@ public class BookController {
   }
 
   //ajax json
-  @RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
+  @RequestMapping(value = "/appoint/{bookId}", method = RequestMethod.POST, produces = {
       "application/json; charset=utf-8"})
   @ResponseBody
-  private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId,
-      @RequestParam("studentId") Long studentId) {
+  /**
+   * 预约图书的方法
+   */
+  private String appoint(@PathVariable("bookId") Long bookId,
+      @RequestParam("studentId") Long studentId,Model model) {
     if (studentId == null || studentId.equals("")) {
-      return new Result<>(false, "学号不能为空");
+      Result<AppointExecution> appointExecutionResult = new Result<>(false, "学号不能为空");
+      model.addAttribute("result",appointExecutionResult);
+      return "result";
     }
     //AppointExecution execution = bookService.appoint(bookId, studentId);//错误写法，不能统一返回，要处理异常（失败）情况
     AppointExecution execution = null;
@@ -73,14 +78,18 @@ public class BookController {
     } catch (Exception e) {
       execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
     }
-    return new Result<AppointExecution>(true, execution);
+    Result<AppointExecution> appointExecutionResult = new Result<>(true, execution);
+    model.addAttribute("appoint",appointExecutionResult);
+    return "appoint";// WEB-INF/jsp/"result".jsp
   }
-
   //加上这个解决乱码问题
   // 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
   // 当返回为json的时候：produces = "application/json; charset=utf-8"
   @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
   @ResponseBody
+  /**
+   * 添加图书的方法
+   */
   private String add(Book book) {
     String s = book.toString();
     System.out.println(s);

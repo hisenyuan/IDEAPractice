@@ -7,6 +7,7 @@
   note: 使用bootstrap输出后台返回的requestScope对象
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String appPath = request.getContextPath() + "/"; %>
 <html>
 <head>
     <title>图书列表</title>
@@ -27,7 +28,7 @@
         <div class="col-md-12 column">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="/ssm/book/list">首页</a></li>
-                <li><a href="/ssm/book/1003/detail">图书具体信息</a></li>
+                <li><a href="/ssm/book/detail/1003">图书具体信息</a></li>
                 <li><a href="/ssm/add.jsp">添加图书信息</a></li>
                 <li class="disabled"><a href="#">信息</a></li>
             </ul>
@@ -51,6 +52,7 @@
                     <th>图书编号</th>
                     <th>图书名字</th>
                     <th>图书数量</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +61,7 @@
                         <td>${book.bookId}</td>
                         <td>${book.name}</td>
                         <td>${book.number}</td>
+                        <td><a href="<%=appPath%>/book/detail/${book.bookId}">详情</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

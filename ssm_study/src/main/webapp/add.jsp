@@ -28,7 +28,7 @@
         <div class="col-md-12 column">
             <ul class="nav nav-tabs">
                 <li><a href="/ssm/book/list">首页</a></li>
-                <li><a href="/ssm/book/1003/detail">图书具体信息</a></li>
+                <li><a href="/ssm/book/detail/1003">图书具体信息</a></li>
                 <li class="active"><a href="/ssm/add.jsp">添加图书信息</a></li>
                 <li class="disabled"><a href="#">信息</a></li>
             </ul>
@@ -48,7 +48,7 @@
 
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <form role="form" id="add" method="post" action="http://localhost:8848/ssm/book/add" accept-charset="utf-8">
+            <form role="form" id="add" method="post" action="<%=appPath%>/book/add" accept-charset="utf-8">
                 <div class="form-group">
                     <label>图书ID</label><input class="form-control" name="bookId"/>
                 </div>

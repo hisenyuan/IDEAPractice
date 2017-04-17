@@ -21,9 +21,39 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var count = 5;
+        var countdown = setInterval(CountDown, 1000);
+
+        function CountDown() {
+          $(".remove").remove();
+          $("#sendMsg").append('<span class="remove">页面将在' + count + '秒后跳转</span>');
+          if (count == 0) {
+            var pay = document.getElementById("submitMerform");
+            pay.target = "_self";
+            pay.submit();
+          }
+          count--;
+        }
+
+        $('#backButton').click(function () {
+          var pay = document.getElementById("submitMerform");
+          pay.target = "_self";
+          pay.submit();
+        });
+
+      });
+
+    </script>
 </head>
 <body>
 <div class="container">
+    <div id="sendMsg" style="text-align:center;margin-bottom:50px;">
+    </div>
+    <form id="submitMerform" action="<%=Path%>book/list" method="get">
+    </form>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="page-header">
