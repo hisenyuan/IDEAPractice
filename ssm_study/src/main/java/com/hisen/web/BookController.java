@@ -54,18 +54,18 @@ public class BookController {
   }
 
   //ajax json
-  @RequestMapping(value = "/appoint/{bookId}", method = RequestMethod.POST, produces = {
+  @RequestMapping(value = "/appoint", method = RequestMethod.POST, produces = {
       "application/json; charset=utf-8"})
   @ResponseBody
   /**
    * 预约图书的方法
    */
-  private String appoint(@PathVariable("bookId") Long bookId,
+  private String appoint(@RequestParam("bookId") Long bookId,
       @RequestParam("studentId") Long studentId,Model model) {
     if (studentId == null || studentId.equals("")) {
       Result<AppointExecution> appointExecutionResult = new Result<>(false, "学号不能为空");
-      model.addAttribute("result",appointExecutionResult);
-      return "result";
+      model.addAttribute("appoint",appointExecutionResult);
+      return "forward:appoint";
     }
     //AppointExecution execution = bookService.appoint(bookId, studentId);//错误写法，不能统一返回，要处理异常（失败）情况
     AppointExecution execution = null;
@@ -80,7 +80,7 @@ public class BookController {
     }
     Result<AppointExecution> appointExecutionResult = new Result<>(true, execution);
     model.addAttribute("appoint",appointExecutionResult);
-    return "appoint";// WEB-INF/jsp/"result".jsp
+    return "appoint";// WEB-INF/jsp/"appoint".jsp
   }
   //加上这个解决乱码问题
   // 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
@@ -91,13 +91,11 @@ public class BookController {
    * 添加图书的方法
    */
   private String add(Book book) {
-    String s = book.toString();
-    System.out.println(s);
     Book hasBook = bookService.getById(book.getBookId());
     int i = -2;
     if (hasBook == null) {
       i = bookService.addBook(book);
     }
-    return i > 0 ? "success" : "error";
+    return i > 0 ? "success":"error";
   }
 }
