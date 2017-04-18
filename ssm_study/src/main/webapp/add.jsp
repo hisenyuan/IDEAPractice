@@ -89,6 +89,9 @@
 <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
 <script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+  function list() {
+    window.location.href="<%=appPath%>book/list";
+  }
   var frm = $('#add');
   frm.submit(function (ev) {
     $.ajax({
@@ -96,7 +99,7 @@
       url: frm.attr('action'),
       data: frm.serialize(),
       success:function(data) {
-          alert("添加成功");
+        list();
       },
       error:function(data){
           alert("添加失败");
