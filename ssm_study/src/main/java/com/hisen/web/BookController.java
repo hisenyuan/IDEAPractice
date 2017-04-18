@@ -61,10 +61,10 @@ public class BookController {
    * 预约图书的方法
    */
   private String appoint(@RequestParam("bookId") Long bookId,
-      @RequestParam("studentId") Long studentId,Model model) {
+      @RequestParam("studentId") Long studentId, Model model) {
     if (studentId == null || studentId.equals("")) {
       Result<AppointExecution> appointExecutionResult = new Result<>(false, "学号不能为空");
-      model.addAttribute("appoint",appointExecutionResult);
+      model.addAttribute("appoint", appointExecutionResult);
       return "forward:appoint";
     }
     //AppointExecution execution = bookService.appoint(bookId, studentId);//错误写法，不能统一返回，要处理异常（失败）情况
@@ -79,9 +79,10 @@ public class BookController {
       execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
     }
     Result<AppointExecution> appointExecutionResult = new Result<>(true, execution);
-    model.addAttribute("appoint",appointExecutionResult);
+    model.addAttribute("appoint", appointExecutionResult);
     return "appoint";// WEB-INF/jsp/"appoint".jsp
   }
+
   //加上这个解决乱码问题
   // 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
   // 当返回为json的时候：produces = "application/json; charset=utf-8"
@@ -96,6 +97,6 @@ public class BookController {
     if (hasBook == null) {
       i = bookService.addBook(book);
     }
-    return i > 0 ? "success":"error";
+    return i > 0 ? "success" : "error";
   }
 }
