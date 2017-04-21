@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String appPath = request.getContextPath(); %>
 <html>
 <head>
     <title>图书详情</title>
@@ -26,9 +27,10 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <ul class="nav nav-tabs">
-                <li><a href="/ssm/book/list">首页</a></li>
-                <li class="active"><a href="/ssm/book/detail/1003">图书具体信息</a></li>
-                <li><a href="/ssm/add.jsp">添加图书信息</a></li>
+                <li><a href="<%=appPath%>/book/list">首页</a></li>
+                <li class="active"><a href="<%=appPath%>/book/detail/1003">图书具体信息</a></li>
+                <li><a href="<%=appPath%>/add.jsp">添加图书信息</a></li>
+                <li><a href="<%=appPath%>/appoint.jsp">预约图书</a></li>
                 <li class="disabled"><a href="#">信息</a></li>
             </ul>
         </div>
