@@ -1,7 +1,9 @@
 package com.hisen.test;
 
 import com.hisen.dto.AppointExecution;
+import com.hisen.entity.Book;
 import com.hisen.service.BookService;
+import java.util.Random;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +21,17 @@ public class BookServiceImplTest extends BaseTest {
     long studentId = 12345678910L;
     AppointExecution execution = bookService.appoint(bookId, studentId);
     System.out.println(execution);
+  }
+
+  @Test
+  public void testAdd(){
+    for (int i = 1; i < 100; i++) {
+      Book book = new Book();
+      book.setBookId(i);
+      book.setName(String.valueOf((char) i+20048));
+      book.setNumber(i*10);
+      bookService.addBook(book);
+    }
   }
 
 }

@@ -1,5 +1,6 @@
 package com.hisen.web;
 
+import com.alibaba.fastjson.JSON;
 import com.hisen.dto.AppointExecution;
 import com.hisen.dto.Result;
 import com.hisen.entity.Book;
@@ -34,7 +35,7 @@ public class BookController {
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   private String list(Model model) {
-    List<Book> list = bookService.getList();
+    List<Book> list = bookService.getList(0, 10);
     model.addAttribute("list", list);
     // list.jsp + model = ModelAndView
     return "list";// WEB-INF/jsp/"list".jsp
@@ -98,5 +99,23 @@ public class BookController {
       i = bookService.addBook(book);
     }
     return i > 0 ? "success" : "error";
+  }
+
+  @RequestMapping(value = "/countNum", method = RequestMethod.POST, produces = {
+      "application/json; charset=utf-8"})
+  @ResponseBody
+  private int countNum() {
+    int num = bookService.countNum();
+    int countNum = num / 10 + ((num % 10) > 0 ? 1 : 0);
+    return countNum;
+  }
+
+  @RequestMapping(value = "/listpage", method = RequestMethod.POST)
+  @ResponseBody
+  private String listPage(@RequestParam("start") int start) {
+    List<Book> list = bookService.getList(start, 10);
+    String s = JSON.toJSONString(list);
+    System.out.println(s);
+    return s;
   }
 }

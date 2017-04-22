@@ -15,6 +15,12 @@
     WHERE
     book_id = #{bookId}
   </select>
+  <select id="countNum" resultType="java.lang.Integer">
+    SELECT
+    COUNT(*)
+    FROM
+    book
+  </select>
 
   <select id="queryAll" resultType="Book">
     SELECT
