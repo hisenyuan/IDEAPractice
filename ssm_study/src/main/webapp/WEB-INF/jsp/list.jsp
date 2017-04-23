@@ -39,10 +39,7 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="page-header">
-                <h1>
-                    图书列表
-                    <small>显示当前图书库存信息</small>
-                </h1>
+                <h1>图书列表 <small>显示当前图书库存信息</small></h1>
             </div>
         </div>
     </div>
@@ -129,6 +126,7 @@
     var page=1;
     var who = $(this).index();
     $('#warning').css('display','none');
+    $('#warning-text').empty();
     if (who == 0) {
       if (now - 1 <= 1) {
         page = 1;
