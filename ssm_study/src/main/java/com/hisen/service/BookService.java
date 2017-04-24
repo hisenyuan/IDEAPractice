@@ -23,7 +23,7 @@ public interface BookService {
    *
    * @return
    */
-  List<Book> getList();
+  List<Book> getList(int start, int pageNum);
 
   /**
    * 预约图书
@@ -41,5 +41,11 @@ public interface BookService {
    * @return
    */
   int addBook(Book book);
+
+  /**
+   * 统计行数
+   * @return
+   */
+  int countNum();
 
 }

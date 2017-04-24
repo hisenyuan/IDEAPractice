@@ -1,5 +1,6 @@
 package com.hisen.web;
 
+import com.alibaba.fastjson.JSON;
 import com.hisen.dto.AppointExecution;
 import com.hisen.dto.Result;
 import com.hisen.entity.Book;
@@ -20,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by hisenyuan on 2017/4/6 at 17:27. 在項目終端Terminal可以測試：curl -H "Accept:application/json;
- * charset=utf-8" -D "studentId=1234567890" 127.0.0.1:8848/ssm/book/1003/appoint
+ * Created by hisenyuan on 2017/4/6 at 17:27
  */
 @Controller
 @RequestMapping("/book") // url:/模块/资源/{id}/细分 /seckill/list
@@ -34,7 +34,7 @@ public class BookController {
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   private String list(Model model) {
-    List<Book> list = bookService.getList();
+    List<Book> list = bookService.getList(0, 10);
     model.addAttribute("list", list);
     // list.jsp + model = ModelAndView
     return "list";// WEB-INF/jsp/"list".jsp
@@ -53,13 +53,12 @@ public class BookController {
     return "detail";
   }
 
-  //ajax json
-  @RequestMapping(value = "/appoint", method = RequestMethod.POST, produces = {
-      "application/json; charset=utf-8"})
-  @ResponseBody
   /**
    * 预约图书的方法
    */
+  @RequestMapping(value = "/appoint", method = RequestMethod.POST, produces = {
+      "application/json; charset=utf-8"})
+  @ResponseBody
   private String appoint(@RequestParam("bookId") Long bookId,
       @RequestParam("studentId") Long studentId, Model model) {
     if (studentId == null || studentId.equals("")) {
@@ -82,15 +81,14 @@ public class BookController {
     model.addAttribute("appoint", appointExecutionResult);
     return "appoint";// WEB-INF/jsp/"appoint".jsp
   }
-
-  //加上这个解决乱码问题
-  // 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
-  // 当返回为json的时候：produces = "application/json; charset=utf-8"
-  @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-  @ResponseBody
   /**
    * 添加图书的方法
+   * 加上这个解决乱码问题
+   * 当返回为字符串的时候：produces = "text/plain;charset=UTF-8"
+   * 当返回为json的时候：produces = "application/json; charset=utf-8"
    */
+  @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+  @ResponseBody
   private String add(Book book) {
     Book hasBook = bookService.getById(book.getBookId());
     int i = -2;
@@ -98,5 +96,35 @@ public class BookController {
       i = bookService.addBook(book);
     }
     return i > 0 ? "success" : "error";
+  }
+
+  /**
+   * 查询总页数
+   * @return
+   */
+  @RequestMapping(value = "/countNum", method = RequestMethod.POST, produces = {
+      "application/json; charset=utf-8"})
+  @ResponseBody
+  private int countNum() {
+    int num = bookService.countNum();
+    //计算页数，如果除以10有余数，得加上一页
+    int countNum = num / 10 + ((num % 10) > 0 ? 1 : 0);
+    return countNum;
+  }
+
+  /**
+   * 分页查询方法
+   * @param start
+   * @return
+   */
+  @RequestMapping(value = "/listpage", method = RequestMethod.POST)
+  @ResponseBody
+  private String listPage(@RequestParam("start") int start) {
+    //默认一页10条
+    List<Book> list = bookService.getList(start, 10);
+    //阿里fastjson把数组转换为json
+    String s = JSON.toJSONString(list);
+    //System.out.println(s);
+    return s;
   }
 }

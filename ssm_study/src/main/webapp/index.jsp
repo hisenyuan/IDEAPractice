@@ -52,7 +52,7 @@
 <div class="container">
     <div id="sendMsg" style="text-align:center;margin-bottom:50px;">
     </div>
-    <form id="submitMerform" action="<%=Path%>book/list" method="get">
+    <form style="display: none" id="submitMerform" action="<%=Path%>book/list" method="get">
     </form>
     <div class="row clearfix">
         <div class="col-md-12 column">

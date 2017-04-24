@@ -36,4 +36,12 @@ public class BookDaoTest extends BaseTest {
     System.out.println("update=" + update);
   }
 
+  @Test
+  public void setCountNum() {
+    int num = bookDao.countNum();
+    int countNum = num / 10 + (num % 10) > 0 ? 1 : 0;
+    int i = (num % 10) > 0 ? 1 : 0;
+    System.out.println(num + ":" + countNum + ":" + i);
+  }
+
 }

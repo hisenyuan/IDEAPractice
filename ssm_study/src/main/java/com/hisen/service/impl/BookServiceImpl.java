@@ -39,8 +39,8 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<Book> getList() {
-    return bookDao.queryAll(0, 1000);
+  public List<Book> getList(int start, int pageNum) {
+    return bookDao.queryAll(start, pageNum);
   }
 
   @Override
@@ -85,6 +85,11 @@ public class BookServiceImpl implements BookService {
   public int addBook(Book book) {
     int i = bookDao.addBook(book);
     return i;
+  }
+
+  @Override
+  public int countNum() {
+    return bookDao.countNum();
   }
 
 }

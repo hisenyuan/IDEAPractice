@@ -42,4 +42,10 @@ public interface BookDao {
    * @return
    */
   int addBook(Book book);
+
+  /**
+   * 统计行数
+   * @return
+   */
+  int countNum();
 }
