@@ -3,7 +3,7 @@ package com.hisen.mvelem;
 import java.util.Arrays;
 
 /**
- * 把数组中的非零元素往前移动 并且 非零元素为升序
+ * 把数组中的非零元素往前移动
  */
 public class MoveElement {
 
