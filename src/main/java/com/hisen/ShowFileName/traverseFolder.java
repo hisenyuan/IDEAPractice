@@ -12,11 +12,9 @@ public class traverseFolder {
    * 向系统剪切板写入内容
    */
   public static void setSystemClipboard(String refContent) {
-    String vc = refContent.trim();
+    String vc = refContent.trim();//去除空格
     StringSelection ss = new StringSelection(vc);
-
-    Clipboard sysClb = null;
-    sysClb = Toolkit.getDefaultToolkit().getSystemClipboard();
+    Clipboard sysClb = Toolkit.getDefaultToolkit().getSystemClipboard();
     sysClb.setContents(ss, null);
   }
 
