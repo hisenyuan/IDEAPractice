@@ -1,0 +1,416 @@
+﻿--一个简单的存储过程
+--涉及循环、各种拼接、判断等
+--author：hisenyuan 留着做纪念
+CREATE OR REPLACE PROCEDURE GET_DATA_TEST(V_TIME in VARCHAR2)  --时间传入格式  201509
+AS
+    v_businessid VARCHAR(100);---平台ID
+    v_resourceid VARCHAR(50);---数据库ID
+    v_starttime NUMBER;
+    v_endtime NUMBER;
+    v_starttime1 NUMBER;
+    v_endtime1 NUMBER;
+    v_lasttime NUMBER;
+    v_businessname VARCHAR(200);---平台名称
+    v_resourcename VARCHAR(200);---数据库ip
+    v_taskid VARCHAR(50);
+    v_timemonth varchar(10);
+
+
+
+    v_sql_select  CLOB;
+    v_where      CLOB;
+    v_all_sql    CLOB;
+    v_all_sql1   CLOB;
+    v_all_sql2   CLOB;
+    v_sql_insert  CLOB;
+	v_from_all		CLOB;
+	v_where_all		CLOB;
+	v_order_all		CLOB;
+    pragma  AUTONOMOUS_TRANSACTION;
+BEGIN
+    IF V_TIME is null THEN
+      --不传参数时默认上个月最后一天的00点 和 当前月第一天的00点
+      select get_millisecond(to_date(to_char(last_day(add_months(to_date(to_char(sysdate,'yyyyMM'),'yyyyMM'),-1)),'yyyy-mm-dd')||' 00:00:00','yyyy/mm/dd hh24:mi:ss')) into v_starttime from dual;
+
+      select get_millisecond(to_date(to_char(to_date(to_char(sysdate,'yyyyMM')||'01','yyyyMMdd'),'yyyy-mm-dd')||' 00:00:00','yyyy/mm/dd hh24:mi:ss')) into v_endtime from dual;
+      select to_char(add_months(sysdate,-1),'yyyyMM') into v_timemonth from dual;
+    ELSE
+      --删除这个月份的数据
+      --delete from t_total_data t where  t.time=''||V_TIME||'';
+      commit;
+      select to_char(to_date(V_TIME,'yyyyMM'),'yyyyMM') into v_timemonth from dual;
+    END IF;
+
+    FOR RS IN (
+      SELECT * FROM PLATFORM_HOST t where t.collect_type = 1 and t.database_type =1
+    ) LOOP
+    v_businessid:=RS.BUSINESS_ID;
+    v_resourceid :=RS.resource_id;
+    v_businessname := RS.business_name;
+    v_resourcename := RS.resource_name;
+
+    v_from_all := '
+            from TASK_TABLE               task, --配置任务表--
+            TASK_META_RELATION       task_meta, --用于存储任务和元任务的关系--
+            META_TASK_TABLE          meta_task, --元任务配置表
+            RESOURCE_TABLE           res, --资源表--
+            TASK_OPSCENARIO_RELATION task_opscenario, -- 任务与维护方案实例关系表
+            OAS_OPSCENARIO           oas, --维护方案表--
+            OAS_OPSCENARIO_OPITEM    oas_opitem, --维护方案与维护项关系表--
+            OAS_OPITEM               oas_op, --维护项表--
+            OAS_OPSCENARIO_INST      oas_inst, --任务中包含的维护方案实例--
+            TASK_RESULT              task_res, --任务结果表
+            META_TASK_RESULT         meta_res, --元任务结果表
+            OAS_OPSCENARIO_RESULT    oas_res --维护方案执行结果表
+    
+          ';
+    v_where_all :='
+            where task.task_id = task_meta.task_id
+            and task_meta.meta_task_id = meta_task.meta_task_id
+            and res.resource_id = meta_task.resource_id
+            and task_opscenario.task_id = task.task_id
+            and task_opscenario.opsc_id = oas.id
+            and oas.id = oas_opitem.opscenario_id
+            and oas_opitem.opitem_id = oas_op.id
+            and task_meta.opscenario_inst_id = oas_inst.id
+			and oas_inst.opscenario_id = oas.id
+			and task_res.task_id = task.task_id
+			and meta_res.meta_task_id = meta_task.meta_task_id
+			and meta_res.opitem_id = oas_op.id
+			and meta_res.task_result_id = task_res.task_result_id
+			and meta_res.opscenario_result_id = oas_res.id
+			and oas_res.task_id = task.task_id
+			and oas_res.task_result_id = task_res.task_result_id
+			and oas_res.resource_id = res.resource_id
+					';
+		v_order_all :='
+						order by task.task_name
+					';
+	
+--********TABLE1 START*********
+    v_taskid := 'f9f51daba0e145bd92a55072cb013600';
+    v_sql_select := ' select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,''' ||v_taskid|| '''tid, task.task_name task,'''||v_timemonth||''' tmonth,meta_task.tem_name name,meta_res.value result,rownum toid'||v_from_all;
+    v_where:= v_where_all ||' 
+    and task_res.time >= '''||v_starttime ||'''
+    and task_res.end_time <= '''||  v_endtime ||'''
+    and task.business_id is not null
+    and res.resource_name = '''||v_resourcename || '''
+    and task.task_id = '''||v_taskid ||'''
+    --and host.business_name ='''||v_businessname||'''
+    and meta_task.tem_name in(''主机名称'',''操作系统版本'',''数据库版本'',''数据库名称'',''实例个数'',''归档模式'',''数据库服务器名称'')
+    '||v_order_all;
+
+    v_sql_insert := ' insert into T_TABLE_DATAS ';
+    v_all_sql := v_sql_insert || v_sql_select || v_where;
+    --dbms_output.put_line(v_all_sql);
+    execute immediate v_all_sql;
+    commit;
+--********TABLE1 END***********
+
+--********TABLE2 START 补丁信息*********
+	v_taskid := '1dcd879992614691a9b9a20e1881880a';
+	v_sql_select := ' select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,'''||v_timemonth||''' tmonth,meta_res.value result'||v_from_all;
+    
+	v_where:= v_where_all ||' 
+    and task_res.time >= '''||v_starttime ||'''
+    and task_res.end_time <= '''||  v_endtime ||'''
+    and task.business_id is not null
+    and res.resource_name = '''||v_resourcename || '''
+    and task.task_id = '''||v_taskid ||'''
+    --and host.business_name ='''||v_businessname||'''
+    and meta_task.tem_name = ''补丁信息''
+    '||v_order_all;
+
+    v_sql_insert := ' insert into T_patch_info ';
+    v_all_sql := v_sql_insert || v_sql_select || v_where;
+    --dbms_output.put_line(v_all_sql);
+    execute immediate v_all_sql;
+    commit;
+--********TABLE2 END***********
+
+--********TABLE3 START 实例运行状态*********
+    v_taskid := '62bedd441fa845fdb033a5c138a8c22f';
+    
+	v_sql_select := ' select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,''' ||v_taskid|| '''tid, task.task_name task,'''||v_timemonth||''' tmonth,meta_task.tem_name name,meta_res.value result,rownum toid'||v_from_all;
+    
+	v_where:= v_where_all ||' 
+    and task_res.time >= '''||v_starttime ||'''
+    and task_res.end_time <= '''||  v_endtime ||'''
+    and task.business_id is not null
+    and res.resource_name = '''||v_resourcename || '''
+    and task.task_id = '''||v_taskid ||'''
+    --and host.business_name ='''||v_businessname||'''
+    and meta_task.tem_name in(''实例运行状态'',''控制文件'',''重做日志文件'',''数据文件'',''表空间使用率'',''DBA权限用户'')
+	'||v_order_all;
+
+    v_sql_insert := ' insert into T_TABLE_DATAS ';
+    v_all_sql := v_sql_insert || v_sql_select || v_where;
+    --dbms_output.put_line(v_all_sql);
+    execute immediate v_all_sql;
+    commit;
+--********TABLE3 END***********
+
+
+--********TABLE4 START oracle进程和会话*********
+    v_taskid := '0f787c734970442895e2b6b0e302dd89';
+    
+	v_sql_select := ' select task.task_name c1,meta_task.tem_name c2,meta_res.value c3'||v_from_all;
+    
+	v_where:= v_where_all ||' 
+    and task_res.time >= '''||v_starttime ||'''
+    and task_res.end_time <= '''||  v_endtime ||'''
+    and task.business_id is not null
+    and res.resource_name = '''||v_resourcename || '''
+    and task.task_id = '''||v_taskid ||'''
+    --and host.business_name ='''||v_businessname||'''
+    and meta_task.tem_name in(''当前会话连接数'',''最大会话连接数'',''当前阻塞会话数'',''session利用率'',''当前进程数'',''最大进程数'',''Processes使用率'')
+	'||v_order_all;
+
+    v_sql_insert := ' insert into T_ORACLE_SESSION ';
+    v_all_sql := 
+	v_sql_insert || 'select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,'''||v_timemonth||''' tmonth,
+	a1,a2,a3,a4,''90%'' a8,a5,a6,a7,''90%'' a9
+	from 
+	(
+	select c1,sum(to_number(a1)) a1,
+	sum(to_number(a2)) a2,
+	sum(to_number(a3)) a3,
+	sum(to_number(a4)) a4,
+	sum(to_number(a5)) a5,
+	sum(to_number(a6)) a6,
+	sum(to_number(a7)) a7
+	from
+	(
+	select c1,decode(c2,''最大会话连接数'',c3,0) a1,
+	decode(c2,''当前会话连接数'',c3,0) a2,
+	decode(c2,''当前阻塞会话数'',c3,0) a3,
+	decode(c2,''session利用率'',c3,0) a4,
+	decode(c2,''当前进程数'',c3,0) a5,
+	decode(c2,''最大进程数'',c3,0) a6,
+	decode(c2,''Processes使用率'',c3,0) a7
+	from 
+	( '
+  || v_sql_select || v_where
+	||
+	')
+	) group by c1
+	)
+	'
+	;
+    --dbms_output.put_line(v_all_sql);
+    --insert into hisen(sql) values(v_all_sql);
+    execute immediate v_all_sql;
+	
+	--24小时的
+	--上个月倒数第二天23:00:00
+	select get_millisecond(a) into v_starttime1 from (select to_date(to_char(a,'YYYY-MM-DD')||' 23:00:00','YYYY-MM-DD HH24:MI:SS') a from( select last_day(add_months(sysdate,-1))-1 a from dual));
+	--上个月倒数第二天23:59:59
+	select get_millisecond(a) into v_endtime1 from (select to_date(to_char(a,'YYYY-MM-DD')||' 23:59:59','YYYY-MM-DD HH24:MI:SS') a from( select last_day(add_months(sysdate,-1))-1 a from dual));
+
+	v_where:= v_where_all ||' 
+    and task_res.time >= '''||v_starttime1 ||'''
+    and task_res.end_time <= '''|| v_endtime1 ||'''
+    and task.business_id is not null
+    and res.resource_name = '''||v_resourcename || '''
+    and task.task_id = '''||v_taskid ||'''
+    --and host.business_name ='''||v_businessname||'''
+    and meta_task.tem_name in(''当前会话连接数'',''最大会话连接数'',''当前阻塞会话数'',''session利用率'',''当前进程数'',''最大进程数'',''Processes使用率'')
+	'||v_order_all;
+	
+	
+	v_all_sql := 'insert into T_ORACLE_SESSION_H select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,'''||v_timemonth||''' tmonth,
+	a1,a2,a3,a4,a5,a6
+	from 
+	(
+	select c1,sum(to_number(a1)) a1,
+	sum(to_number(a2)) a2,
+	sum(to_number(a3)) a3,
+	sum(to_number(a4)) a4,
+	sum(to_number(a5)) a5,
+	sum(to_number(a6)) a6
+	from
+	(
+	select c1,decode(c2,''当前session使用率'',c3,0) a1,
+	decode(c2,''最大会话连接数'',c3,0) a2,
+	decode(c2,''当前会话连接数'',c3,0) a3,
+	decode(c2,''当前进程使用率'',c3,0) a4,
+	decode(c2,''当前进程数'',c3,0) a5,
+	decode(c2,''最大进程数'',c3,0) a6
+	from 
+	( '
+	|| v_sql_select || v_where
+	||
+	')
+	) group by c1
+	)
+	'
+	;
+	
+	--insert into hisen(sql) values(v_all_sql);
+	execute immediate v_all_sql;
+	
+	--结论
+	v_all_sql :=
+	'
+	insert into T_DATA_CONCLUSION 
+	select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,'''||v_timemonth||''' tmonth,c1,
+	CASE WHEN a1>0 or a2>90 or a3/a4 > 0.9 then ''异常'' ELSE ''正常'' END a,row_number() over(order by a4 asc) wid
+	 from
+	(
+	select
+	  c1,
+	  sum(to_number(decode(c2,''当前阻塞会话数'',c3,0))) a1,
+	  sum(to_number(decode(c2,''session利用率'',c3,0))) a2,
+	  sum(to_number(decode(c2,''当前进程数'',c3,0))) a3,
+	  sum(to_number(decode(c2,''最大进程数'',c3,0))) a4
+	from
+	(
+	--当前会话连接数
+	select task.task_name     c1,
+		   meta_task.tem_name c2,
+		   meta_res.value     c3
+		'
+		|| v_from_all
+		|| v_where_all ||
+		'
+		and task_res.time >= '''||v_starttime1 ||'''
+		and task_res.end_time <= '''|| v_endtime1 ||'''
+		and task.business_id is not null
+		and res.resource_name = '''||v_resourcename || '''
+		and task.task_id = '''||v_taskid ||'''
+	   and meta_task.tem_name in(''当前阻塞会话数'',''session利用率'',''当前进程数'',''最大进程数'')
+	 order by task.task_name
+	 )
+	 group by c1
+	 )
+	 ';
+	
+	insert into hisen(sql) values(v_all_sql);
+	--execute immediate v_all_sql;
+	
+    commit;
+--********TABLE4 END***********
+
+--********TABLE5 START	命中率*********
+    v_taskid := '9e374f93272849feb72f433dcd611b8b';
+    --上个月倒数第二天
+	select get_millisecond(a) into v_starttime1  from (select last_day(add_months(sysdate,-1))-1 a from dual);
+	--上个月倒数第二天的上周同一天命中率
+	select get_millisecond(a) into v_endtime1  from (select trunc(last_day(add_months(sysdate,-1))-1) - to_char((last_day(add_months(sysdate,-1))-1),'DAY','NLS_DATE_LANGUAGE=''numeric date language''')-1 a from dual);
+	--上个月最后一天
+	select get_millisecond(a) into v_lasttime  from (select trunc(last_day(add_months(sysdate, -1))) a from dual);
+    
+	v_sql_insert := ' insert into T_HIT_RATE ';
+    v_all_sql :=
+				'select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,'''||v_timemonth||''' tmonth,a.c2 c,b.c3 c1,a.c3 c2,c.c3 c3  from
+				(
+				--高速缓存命中率
+				select task.task_name     c1,
+					   meta_task.tem_name c2,
+					   meta_res.value     c3
+				'
+				||v_from_all||v_where_all||
+				'
+				   and res.resource_name = '''||v_resourcename || '''
+				   and task.task_id = '''||v_taskid ||'''
+				   and task_res.time = '''||v_starttime1 ||'''
+					--and host.business_name ='''||v_businessname||'''
+				   and meta_task.tem_name in(''高速缓存命中率'',''库缓存命中率'',''闩锁请求命中率'',''内存排序命中率'',''缓冲区未等待比率'',''redo缓冲区未等待比率'',''SQL语句执行和分析的比例'')
+				 '||v_order_all||'
+				)a,
+				(
+				--高速缓存命中率
+				select task.task_name     c1,
+					   meta_task.tem_name c2,
+					   meta_res.value     c3
+				'
+				||v_from_all||v_where_all||
+				'
+				   and res.resource_name = '''||v_resourcename || '''
+				   and task.task_id = '''||v_taskid ||'''
+				   and task_res.time = '''||v_endtime1 ||'''
+					--and host.business_name ='''||v_businessname||'''
+				   and meta_task.tem_name in(''高速缓存命中率'',''库缓存命中率'',''闩锁请求命中率'',''内存排序命中率'',''缓冲区未等待比率'',''redo缓冲区未等待比率'',''SQL语句执行和分析的比例'')
+				 '||v_order_all||'
+				 )b,
+				(
+				--高速缓存命中率
+				select task.task_name     c1,
+					   meta_task.tem_name c2,
+					   meta_res.value     c3
+				'
+				||v_from_all||v_where_all||
+				'
+				   and res.resource_name = '''||v_resourcename || '''
+				   and task.task_id = '''||v_taskid ||'''
+				   and task_res.time = '''|| v_lasttime ||'''
+					--and host.business_name ='''||v_businessname||'''
+				   and meta_task.tem_name in(''高速缓存命中率'',''库缓存命中率'',''闩锁请求命中率'',''内存排序命中率'',''缓冲区未等待比率'',''redo缓冲区未等待比率'',''SQL语句执行和分析的比例'')
+				 '||v_order_all||'
+				 )c
+				 where a.c1 = b.c1
+				 and a.c1=c.c1
+				';
+	v_all_sql1 :=v_sql_insert||v_all_sql;
+	--结论
+	v_all_sql2 := 'insert into T_DATA_CONCLUSION select bid,rid,tmonth,c,CASE WHEN to_number(dbms_lob.substr(c3,10))>0.6 then c3 ELSE ''命中率偏低，当前值为''||c3||''。请观察数据情况，根据实际生产环境进行判断，确定是否优化'' END c3,row_number() over(order by to_number(dbms_lob.substr(c3,10)) asc) wid from
+('||
+	v_all_sql||
+	')';
+    --dbms_output.put_line(v_all_sql);
+	--insert into hisen(sql) values(v_all_sql2);
+    execute immediate v_all_sql1;
+	execute immediate v_all_sql2;
+	
+	--上个月倒数第二天23:00:00
+	select get_millisecond(a) into v_starttime from (select to_date(to_char(a,'YYYY-MM-DD')||' 23:00:00','YYYY-MM-DD HH24:MI:SS') a from( select last_day(add_months(sysdate,-1))-1 a from dual));
+	--上个月倒数第二天23:59:59
+	select get_millisecond(a) into v_endtime from (select to_date(to_char(a,'YYYY-MM-DD')||' 23:59:59','YYYY-MM-DD HH24:MI:SS') a from( select last_day(add_months(sysdate,-1))-1 a from dual));
+
+	--上个月倒数第二天的上周同一天23:00:00
+	select get_millisecond(a) into v_starttime1 from (select to_date(to_char(a,'YYYY-MM-DD')||' 23:00:00','YYYY-MM-DD HH24:MI:SS') a from( select trunc(last_day(add_months(sysdate,-1))-1) - to_char((last_day(add_months(sysdate,-1))-1),'DAY','NLS_DATE_LANGUAGE=''numeric date language''')-1 a from dual));
+  --上个月倒数第二天的上周同一天23:59:59
+  select get_millisecond(a) into v_endtime1 from (select to_date(to_char(a,'YYYY-MM-DD')||' 23:59:59','YYYY-MM-DD HH24:MI:SS') a from( select trunc(last_day(add_months(sysdate,-1))-1) - to_char((last_day(add_months(sysdate,-1))-1),'DAY','NLS_DATE_LANGUAGE=''numeric date language''')-1 a from dual));
+  
+  v_all_sql :='insert into T_HIT_RATE_H select ''' || v_businessid || '''bid,''' ||v_resourceid|| '''rid,'''||v_timemonth||''' tmonth,a.c2 c,b.c3 c1,a.c3 c2  from
+        (
+        --高速缓存命中率
+        select task.task_name     c1,
+             meta_task.tem_name c2,
+             meta_res.value     c3
+        '
+        ||v_from_all||v_where_all||
+        '
+           and res.resource_name = '''||v_resourcename || '''
+           and task.task_id = '''||v_taskid ||'''
+           and task_res.time >= '''||v_starttime ||'''
+           and task_res.time <= '''||v_endtime ||'''
+          --and host.business_name ='''||v_businessname||'''
+           and meta_task.tem_name in(''高速缓存命中率'',''库缓存命中率'',''闩锁请求命中率'',''内存排序命中率'',''缓冲区未等待比率'',''redo缓冲区未等待比率'',''SQL语句执行和分析的比例'')
+         '||v_order_all||'
+        )a,
+        (
+        --高速缓存命中率
+        select task.task_name     c1,
+             meta_task.tem_name c2,
+             meta_res.value     c3
+        '
+        ||v_from_all||v_where_all||
+        '
+           and res.resource_name = '''||v_resourcename || '''
+           and task.task_id = '''||v_taskid ||'''
+           and task_res.time >= '''||v_starttime1 ||'''
+           and task_res.time <= '''||v_endtime1 ||'''
+          --and host.business_name ='''||v_businessname||'''
+           and meta_task.tem_name in(''高速缓存命中率'',''库缓存命中率'',''闩锁请求命中率'',''内存排序命中率'',''缓冲区未等待比率'',''redo缓冲区未等待比率'',''SQL语句执行和分析的比例'')
+         '||v_order_all||'
+         )b
+         where a.c1 = b.c1
+        ';
+  --insert into hisen(sql) values(v_all_sql);
+  execute immediate v_all_sql;
+    commit;
+--********TABLE5 END***********
+
+END LOOP;
+end GET_DATA_TEST;

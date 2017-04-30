@@ -1,0 +1,19 @@
+java生成随机字符串，java生成随机密码
+
+有时候我是需要设置一些比较变态的密码
+但是去各种网站或者各种应用生成的话不放心
+就用java自己写了一个，看了很多人写的都是这种
+String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+提前把所有的字符都放进去数字，然后再用随机数进行截取。
+需要几十行复杂的代码，感觉太low了
+
+于是就用这个方法写了一下，代码量也比较少。
+包含特殊字符，大小写字母，特殊符号等94种可能
+public static String code(int length) {
+String s = "";
+for (int i = 0; i < length; i++) {
+int random = 33 + (int) (Math.random() * 94);
+s += (char) Integer.parseInt(String.valueOf(random));
+}
+return s;
+}
