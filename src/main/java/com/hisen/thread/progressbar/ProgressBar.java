@@ -9,7 +9,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JWindow;
 
 /**
- * 显示一个进度条
+ * 显示一个进度条 - swing
  *
  * @author hisenyuan 2017年1月14日    下午5:40:14
  */
