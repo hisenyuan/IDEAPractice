@@ -16,8 +16,8 @@ import org.dom4j.io.SAXReader;
 public class Dom4jTest {
 	public void test() throws Exception{
 		SAXReader reader = new SAXReader();
-		Document document = reader.read(new File("src/com/hisen/jars/dom4j/test.xml"));
-		Element root = document.getRootElement();
+    Document document = reader.read(new File("src/main/java/com/hisen/jars/dom4j/test.xml"));
+    Element root = document.getRootElement();
 		listNodes(root);
 	}
 
