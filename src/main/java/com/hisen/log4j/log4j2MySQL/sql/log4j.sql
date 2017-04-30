@@ -1,12 +1,12 @@
 #创建数据库
-CREATE database log4j;
+CREATE DATABASE log4j;
 #使用
-use log4j;
+USE log4j;
 #建表
-CREATE TABLE log(
-    Class varchar (255)   NULL ,
-    Mothod varchar (255)   NULL ,
-    CreateTime varchar (255)   NULL ,
-    LogLevel varchar (20)   NULL ,
-    MSG varchar (555)   NULL
+CREATE TABLE log (
+  Class      VARCHAR(255) NULL,
+  Mothod     VARCHAR(255) NULL,
+  CreateTime VARCHAR(255) NULL,
+  LogLevel   VARCHAR(20)  NULL,
+  MSG        VARCHAR(555) NULL
 )

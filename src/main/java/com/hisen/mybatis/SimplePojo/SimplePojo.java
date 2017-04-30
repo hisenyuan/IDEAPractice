@@ -7,6 +7,7 @@ import java.util.Date;
  * Created by hisenyuan on 2017/4/19 at 11:21.
  */
 public class SimplePojo {
+
   private int id;
   private String name;
   private int age;

@@ -19,7 +19,7 @@
         <option name="a" value="yes">yes</option>
         <option name="b" value="no">no</option>
     </select>
-        <input type="submit">
+    <input type="submit">
 </form>
 </body>
 </html>

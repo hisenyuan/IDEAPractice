@@ -7,7 +7,8 @@ import java.io.IOException;
  * Created by hisenyuan on 2017/4/18 at 18:33.
  */
 public class BuildFileUtil {
-  public static void buildFile(File file){
+
+  public static void buildFile(File file) {
     if (!file.exists()) {
       File parent = file.getParentFile();
       if (parent != null && !parent.exists()) {

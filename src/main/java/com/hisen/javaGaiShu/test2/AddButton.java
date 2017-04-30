@@ -6,10 +6,12 @@ import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class AddButton extends Applet {
-Button button;
-public void init(){
-	setBackground(Color.lightGray);
-	button = new Button("我是按钮");
-	add(button);
-}
+
+  Button button;
+
+  public void init() {
+    setBackground(Color.lightGray);
+    button = new Button("我是按钮");
+    add(button);
+  }
 }

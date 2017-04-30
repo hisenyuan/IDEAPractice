@@ -24,6 +24,23 @@ public class ZipOrUnZipFileUtil {
   private ZipOutputStream zos;
   private int lastIndexOf;
 
+  /**
+   * 判断文件是否存在，不存在创建
+   */
+  private static void buildFile(File file) {
+    if (!file.exists()) {
+      File parent = file.getParentFile();
+      if (parent != null && !parent.exists()) {
+        parent.mkdirs();
+      }
+      try {
+        file.createNewFile();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
   @Test
   public void testZipOrUnZipFile() {
     //分隔符，windows linux下有所不同
@@ -38,7 +55,6 @@ public class ZipOrUnZipFileUtil {
     unZipFile(zipFilePath, newPath);
     zipFile(folderPath);
   }
-
 
   /**
    * 压缩文件
@@ -146,23 +162,6 @@ public class ZipOrUnZipFileUtil {
       e.printStackTrace();
     } finally {
       IOUtils.closeQuietly(inputStream, outputStream, zipInputStream);
-    }
-  }
-
-  /**
-   * 判断文件是否存在，不存在创建
-   */
-  private static void buildFile(File file) {
-    if (!file.exists()) {
-      File parent = file.getParentFile();
-      if (parent != null && !parent.exists()) {
-        parent.mkdirs();
-      }
-      try {
-        file.createNewFile();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
     }
   }
 }

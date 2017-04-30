@@ -1,82 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hisen.mybatis.SimplePojo.SimplePojoDao">
 
-<!--auto generated Code-->
-    <resultMap id="AllColumnMap" type="com.hisen.mybatis.SimplePojo.SimplePojo">
-        <result column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="age" property="age"/>
-        <result column="date" property="date"/>
-    </resultMap>
+  <!--auto generated Code-->
+  <resultMap id="AllColumnMap" type="com.hisen.mybatis.SimplePojo.SimplePojo">
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="age" property="age"/>
+    <result column="date" property="date"/>
+  </resultMap>
 
-<!--auto generated Code-->
-    <sql id="all_column">
-        id,
-        name,
-        age,
-        date
-    </sql>
+  <!--auto generated Code-->
+  <sql id="all_column">
+    id,
+    name,
+    age,
+    date
+  </sql>
 
-<!--auto generated Code-->
-    <insert id="insert">
-        INSERT INTO simple_pojo
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id != null"> id, </if>
-            <if test="pojo.name != null"> name, </if>
-            <if test="pojo.age != null"> age, </if>
-            <if test="pojo.date != null"> date, </if>
-        </trim>
-        VALUES
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id != null"> #{pojo.id}, </if>
-            <if test="pojo.name != null"> #{pojo.name}, </if>
-            <if test="pojo.age != null"> #{pojo.age}, </if>
-            <if test="pojo.date != null"> #{pojo.date}, </if>
-        </trim>
-    </insert>
+  <!--auto generated Code-->
+  <insert id="insert">
+    INSERT INTO simple_pojo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pojo.id != null">id,</if>
+      <if test="pojo.name != null">name,</if>
+      <if test="pojo.age != null">age,</if>
+      <if test="pojo.date != null">date,</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pojo.id != null">#{pojo.id},</if>
+      <if test="pojo.name != null">#{pojo.name},</if>
+      <if test="pojo.age != null">#{pojo.age},</if>
+      <if test="pojo.date != null">#{pojo.date},</if>
+    </trim>
+  </insert>
 
-<!--auto generated Code-->
-    <insert id="insertList">
-        INSERT INTO simple_pojo(
-        <include refid="all_column"/>
-        )VALUES
-        <foreach collection="pojos" item="pojo" index="index" separator=",">
-            (
-            #{pojo.id},
-            #{pojo.name},
-            #{pojo.age},
-            #{pojo.date}
-            )
-        </foreach>
-    </insert>
+  <!--auto generated Code-->
+  <insert id="insertList">
+    INSERT INTO simple_pojo(
+    <include refid="all_column"/>
+    )VALUES
+    <foreach collection="pojos" index="index" item="pojo" separator=",">
+      (
+      #{pojo.id},
+      #{pojo.name},
+      #{pojo.age},
+      #{pojo.date}
+      )
+    </foreach>
+  </insert>
 
-<!--auto generated Code-->
-    <update id="update">
-        UPDATE simple_pojo
-        <set>
-            <if test="pojo.id != null"> id = #{pojo.id}, </if>
-            <if test="pojo.name != null"> name = #{pojo.name}, </if>
-            <if test="pojo.age != null"> age = #{pojo.age}, </if>
-            <if test="pojo.date != null"> date = #{pojo.date} </if>
-        </set>
-         WHERE id = #{pojo.id}
-    </update>
+  <!--auto generated Code-->
+  <update id="update">
+    UPDATE simple_pojo
+    <set>
+      <if test="pojo.id != null">id = #{pojo.id},</if>
+      <if test="pojo.name != null">name = #{pojo.name},</if>
+      <if test="pojo.age != null">age = #{pojo.age},</if>
+      <if test="pojo.date != null">date = #{pojo.date}</if>
+    </set>
+    WHERE id = #{pojo.id}
+  </update>
 
-<!--auto generated Code-->
-    <select id="select" resultMap="AllColumnMap">
-        SELECT <include refid="all_column"/>
-        FROM simple_pojo
-        <where>
-            <if test="pojo.id != null"> AND id = #{pojo.id} </if>
-            <if test="pojo.name != null"> AND name = #{pojo.name} </if>
-            <if test="pojo.age != null"> AND age = #{pojo.age} </if>
-            <if test="pojo.date != null"> AND date = #{pojo.date} </if>
-        </where>
-    </select>
+  <!--auto generated Code-->
+  <select id="select" resultMap="AllColumnMap">
+    SELECT
+    <include refid="all_column"/>
+    FROM simple_pojo
+    <where>
+      <if test="pojo.id != null">AND id = #{pojo.id}</if>
+      <if test="pojo.name != null">AND name = #{pojo.name}</if>
+      <if test="pojo.age != null">AND age = #{pojo.age}</if>
+      <if test="pojo.date != null">AND date = #{pojo.date}</if>
+    </where>
+  </select>
 
-<!--auto generated Code-->
-    <delete id="delete">
-        DELETE FROM simple_pojo where id = #{pojo.id}
-    </delete>
+  <!--auto generated Code-->
+  <delete id="delete">
+    DELETE FROM simple_pojo where id = #{pojo.id}
+  </delete>
 </mapper>

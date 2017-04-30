@@ -16,12 +16,12 @@ public class GetStockInformation {
 
   public static void main(String[] args) {
     //股票代码数组
-    String[] stocks = {"sh600877", "sz000616","sh601669","sh601216"};
+    String[] stocks = {"sh600877", "sz000616", "sh601669", "sh601216"};
     List<List<String[]>> lists = httpGet(stocks);
     System.out.println("map:-------------------------");
-    for (List<String[]> arr : lists){
-      for (String[] strs : arr){
-        System.out.printf("%s ---> %s\n",strs[0],strs[1]);
+    for (List<String[]> arr : lists) {
+      for (String[] strs : arr) {
+        System.out.printf("%s ---> %s\n", strs[0], strs[1]);
       }
     }
 
@@ -44,14 +44,14 @@ public class GetStockInformation {
       reader = new BufferedReader(new InputStreamReader(ur.openStream(), "GBK"));
       String line;
       while ((line = reader.readLine()) != null) {
-        String res = line.substring(line.indexOf("\"")+1, line.lastIndexOf("\""));
-        System.out.printf("加工报文：%s\n",res);
-        String[] split =res.split(",");
+        String res = line.substring(line.indexOf("\"") + 1, line.lastIndexOf("\""));
+        System.out.printf("加工报文：%s\n", res);
+        String[] split = res.split(",");
         List<String[]> list = new ArrayList<>();
         for (int i = 0; i < split.length; i++) {
           String[] strs = new String[2];
-          strs[0]=keys[i];
-          strs[1]=split[i];
+          strs[0] = keys[i];
+          strs[1] = split[i];
           list.add(strs);
         }
         strList.add(list);

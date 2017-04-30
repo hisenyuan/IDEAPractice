@@ -10,7 +10,7 @@ public class GetAllFileUtil {
   public static void main(String[] args) {
     String filePath = "c:" + File.separator + "1" + File.separator + "hisenyuan";
     String replace = filePath + "\\";
-    getAllFile(filePath,replace);
+    getAllFile(filePath, replace);
   }
 
   /**

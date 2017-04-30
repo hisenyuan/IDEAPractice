@@ -33,17 +33,17 @@ public class ReflectPersonDemo {
       Method[] methods1 = c.getMethods();
       for (Method m : methods) {
         String methodName = m.getName();
-        System.out.println("methods(不包括父类):"+methodName);
+        System.out.println("methods(不包括父类):" + methodName);
       }
       System.out.println("---------------------------------");
       for (Method m : methods1) {
         String methodName = m.getName();
-        System.out.println("methods(包括父类):"+methodName);
+        System.out.println("methods(包括父类):" + methodName);
       }
       System.out.println("-----调用methods(不包括父类)数组中的方法-----");
       Object o = c.newInstance();
       //调用setName方法
-      methods[1].invoke(o,"hisen");
+      methods[1].invoke(o, "hisen");
       //调用getName方法
       System.out.println(methods[0].invoke(o));
       //调用fun无参数方法
@@ -60,7 +60,7 @@ public class ReflectPersonDemo {
   }
 
   @Test
-  public void getOneDeclaredConstructor(){
+  public void getOneDeclaredConstructor() {
     try {
       Class c = Class.forName("com.hisen.Reflect.get.Person");
       //获取构造函数
@@ -76,11 +76,11 @@ public class ReflectPersonDemo {
   }
 
   @Test
-  public void getAllDeclaredConstructor(){
+  public void getAllDeclaredConstructor() {
     try {
       Class c = Class.forName("com.hisen.Reflect.get.Person");
       Constructor[] constructors = c.getDeclaredConstructors();
-      for (Constructor s: constructors) {
+      for (Constructor s : constructors) {
         System.out.println(s.getName());
       }
     } catch (ClassNotFoundException e) {
