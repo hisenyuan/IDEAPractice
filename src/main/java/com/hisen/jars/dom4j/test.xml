@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<workers>  
-    <worker1 id="001">  
-        <高级java>@hisenyuan</高级java>  
-        <工号>20110714</工号>  
-        <地址>北京</地址>  
-        <座右铭>唯有跑步和读书不能放弃</座右铭>  
-    </worker1>  
-    <worker2 id="002">  
-        <初级java>@hisenyuan</初级java>  
-        <学号>20080808</学号>  
-        <地址>北京朝阳区</地址>  
-        <座右铭>三样东西别人抢不走：一是吃进胃里的食物,二是藏在心中的梦想,三是读进大脑里的书丨</座右铭>  
-    </worker2>  
+<?xml version="1.0" encoding="UTF-8"?>
+<workers>
+  <worker1 id="001">
+    <高级java>@hisenyuan</高级java>
+    <工号>20110714</工号>
+    <地址>北京</地址>
+    <座右铭>唯有跑步和读书不能放弃</座右铭>
+  </worker1>
+  <worker2 id="002">
+    <初级java>@hisenyuan</初级java>
+    <学号>20080808</学号>
+    <地址>北京朝阳区</地址>
+    <座右铭>三样东西别人抢不走：一是吃进胃里的食物,二是藏在心中的梦想,三是读进大脑里的书丨</座右铭>
+  </worker2>
 </workers>  
