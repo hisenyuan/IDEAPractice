@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -64,7 +65,7 @@ public class ShowFileNameFrame extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == btn) {
       String old = t1.getText();
-      String delete = t1.getText() + "\\";
+      String delete = t1.getText() + File.separator;
       if (old == null || old.equals("")) {
         JOptionPane.showMessageDialog(this, "输入为空,请重新输入");
       } else {
