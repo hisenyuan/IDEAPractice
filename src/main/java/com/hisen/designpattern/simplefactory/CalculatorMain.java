@@ -1,7 +1,7 @@
 package com.hisen.designpattern.simplefactory;
 
 /**
- * 计算器类
+ * 计算器 - 利用简单工厂模式实现
  * Created by hisen on 17-4-16.
  */
 public class CalculatorMain {
