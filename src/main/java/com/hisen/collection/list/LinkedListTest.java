@@ -3,6 +3,9 @@ package com.hisen.collection.list;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * LinkedList 的用法，以及使用LinkedList实现队列和栈
+ */
 public class LinkedListTest {
 
   public static void main(String[] args) {
