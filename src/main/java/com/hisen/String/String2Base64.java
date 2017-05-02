@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.FileWriterWithEncoding;
 
 /**
@@ -33,7 +34,7 @@ public class String2Base64 {
   }
 
   public static void str2File(String str) {
-    String path = "src/main/java/com/hisen/String/text/str2File.txt";
+    String path = "src/main/java/com/hisen/String/text/str2File1.txt";
     File file = new File(path);
     if (!file.exists()) {
       File parent = file.getParentFile();
@@ -46,8 +47,6 @@ public class String2Base64 {
       } catch (IOException e) {
         e.printStackTrace();
       }
-      System.out.println("新建路径：" + file);
-      System.out.println("创建文件完成！");
     }
     FileWriterWithEncoding fw = null;
     BufferedWriter bw = null;
@@ -60,20 +59,7 @@ public class String2Base64 {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      if (bw != null) {
-        try {
-          bw.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-      if (fw != null) {
-        try {
-          fw.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
+      IOUtils.closeQuietly(fw,bw);
     }
 
   }
