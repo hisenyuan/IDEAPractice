@@ -47,9 +47,9 @@ public class UserInformation {
       String id = "项目编号：" + jsonMap.get("id");
       String name = "项目名称：" + jsonMap.get("name");
       String html_url = "项目地址：" + jsonMap.get("html_url");
-      String created_at = "创建时间：" + jsonMap.get("created_at");
-      String updated_at = "更新时间：" + jsonMap.get("updated_at");
-      String pushed_at = "提交时间：" + jsonMap.get("pushed_at");
+      String created_at = "创建时间：" + jsonMap.get("created_at").replace("T", " ").replace("Z", "");
+      String updated_at = "更新时间：" + jsonMap.get("updated_at").replace("T", " ").replace("Z", "");
+      String pushed_at = "提交时间：" + jsonMap.get("pushed_at").replace("T", " ").replace("Z", "");
       String size = "项目大小：" + jsonMap.get("size");
       String language = "编程语言：" + jsonMap.get("language");
       System.out
@@ -85,8 +85,8 @@ public class UserInformation {
     String location = "地理位置：" + jsonMap.get("location");
     String bio = "个人说明：" + jsonMap.get("bio");
     String public_repos = "仓库个数：" + jsonMap.get("public_repos");
-    String created_at = "创建时间：" + jsonMap.get("created_at").replace("T", " ").replace("z", "");
-    String updated_at = "最后更新：" + jsonMap.get("updated_at").replace("T", " ").replace("z", "");
+    String created_at = "创建时间：" + jsonMap.get("created_at").replace("T", " ").replace("Z", "");
+    String updated_at = "最后更新：" + jsonMap.get("updated_at").replace("T", " ").replace("Z", "");
     System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", login, id, avatar_url, name, blog,
         location, bio, public_repos, created_at, updated_at);
   }
