@@ -83,12 +83,13 @@ public class UserInformation {
     String name = "用户昵称：" + jsonMap.get("name");
     String blog = "博客地址：" + jsonMap.get("blog");
     String location = "地理位置：" + jsonMap.get("location");
+    String email = "个人邮箱：" +  jsonMap.get("email");
     String bio = "个人说明：" + jsonMap.get("bio");
     String public_repos = "仓库个数：" + jsonMap.get("public_repos");
     String created_at = "创建时间：" + jsonMap.get("created_at").replace("T", " ").replace("Z", "");
     String updated_at = "最后更新：" + jsonMap.get("updated_at").replace("T", " ").replace("Z", "");
-    System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", login, id, avatar_url, name, blog,
-        location, bio, public_repos, created_at, updated_at);
+    System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", login, id, avatar_url, name, blog,
+        location,email, bio, public_repos, created_at, updated_at);
   }
 
   public static String getGithubAPIJson(String url) {
