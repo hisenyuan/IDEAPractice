@@ -8,6 +8,7 @@ import com.hisen.utils.File2ByteArraysUtil;
  */
 public class ShowImageByBase64 {
   public static String showimage(){
+    //写相对路径会报错，暂时不知道如何解决
     String imagePath = "C:\\1\\830.jpg";
     byte[] bytes = File2ByteArraysUtil.file2Bytes(imagePath);
     String s = Base64Util.encodeBase64(bytes);

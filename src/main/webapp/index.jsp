@@ -12,6 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<img src="data:image/png;base64,<%=imageStr%>"/>
+<img src="data:image/png;base64,<%=imageStr%>" alt="base64图片"/>
 </body>
 </html>
