@@ -162,6 +162,11 @@
         <artifactId>dom4j</artifactId>
         <version>1.6</version>
       </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.14-beta1</version>
+        </dependency>
     </dependencies>
 
 
