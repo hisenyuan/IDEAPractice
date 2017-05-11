@@ -7,12 +7,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 /**
  * Created by hisenyuan on 2017/4/18 at 18:27.
  */
 public class File2ByteArraysUtil {
-
+  private static Logger logger = Logger.getLogger(File2ByteArraysUtil.class);
   public static byte[] file2Bytes(String path) {
     byte[] buffer = null;
     File file = new File(path);
@@ -29,6 +31,7 @@ public class File2ByteArraysUtil {
       buffer = bos.toByteArray();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
+      logger.error("错误："+e);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -42,9 +45,6 @@ public class File2ByteArraysUtil {
     try {
       file = new File(filePath);
       BuildFileUtil.buildFile(file);
-//      FileImageOutputStream imageOutput = new FileImageOutputStream(file);
-//      imageOutput.write(bytes, 0, bytes.length);
-//      imageOutput.close();
       file = new File(filePath);
       BuildFileUtil.buildFile(file);
       fos = new FileOutputStream(file);
@@ -54,21 +54,9 @@ public class File2ByteArraysUtil {
       System.out.println("生成完成");
     } catch (Exception e) {
       e.printStackTrace();
+      logger.error("错误："+e);
     } finally {
-      if (bos != null) {
-        try {
-          bos.close();
-        } catch (IOException e1) {
-          e1.printStackTrace();
-        }
-      }
-      if (fos != null) {
-        try {
-          fos.close();
-        } catch (IOException e1) {
-          e1.printStackTrace();
-        }
-      }
+      IOUtils.closeQuietly(bos,fos);
     }
   }
 }
