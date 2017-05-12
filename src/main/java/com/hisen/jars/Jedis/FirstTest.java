@@ -1,4 +1,4 @@
-package com.hisen.Jedis;
+package com.hisen.jars.Jedis;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,12 +23,15 @@ public class FirstTest {
   public void testMap() {
     Jedis jedis = new Jedis("127.0.0.1", 6379);
     jedis.select(2);
-    jedis.hset("family", "lbq", "65"); //同Redis命令行中的hset操作，如名为family的set不存在，则创建set并放入名为lbq的元素，值为65
-    jedis.hset("family", "zjz", "62"); //Redis不支持int类型，如不传String则会报错。
+    //同Redis命令行中的hset操作，如名为family的set不存在，则创建set并放入名为lbq的元素，值为65
+    jedis.hset("family", "lbq", "65");
+    //Redis不支持int类型，如不传String则会报错。
+    jedis.hset("family", "zjz", "62");
     System.out.println(jedis.hmget("family", "lbq", "zjz"));
 
     Map testMap1 = new HashMap();
-    testMap1.put("num1", "1"); //此处同上面，不能传非String型
+    //此处同上面，不能传非String型
+    testMap1.put("num1", "1");
     testMap1.put("num2", "15");
     testMap1.put("num3", "606");
     testMap1.put("num4", "1024");
