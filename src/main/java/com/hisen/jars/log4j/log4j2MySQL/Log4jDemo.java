@@ -1,4 +1,4 @@
-package com.hisen.log4j.log4j2MySQL;
+package com.hisen.jars.log4j.log4j2MySQL;
 
 import org.apache.log4j.Logger;
 
@@ -40,14 +40,14 @@ public class Log4jDemo {
  | com.hisen.log4j.Log4jDemo             | main   | 2017-03-21 12:54:34 | ERROR    | This is error message. |
  | com.hisen.log4j.log4jMySQL.Log4jDemo  | main   | 2017-03-21 13:36:27 | INFO     | 这是info信息           |
  | com.hisen.log4j.log4jMySQL.Log4jDemo  | main   | 2017-03-21 13:36:28 | ERROR    | 这是error信息          |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:27:16 | INFO     | 这是info信息           |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:27:16 | ERROR    | 这是error信息          |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:39:34 | INFO     | 这是info信息           |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:39:34 | ERROR    | 这是error信息          |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:42:27 | INFO     | 这是info信息           |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:42:27 | ERROR    | 这是error信息          |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | hisen  | 2017-03-21 14:42:27 | INFO     | 这是方法中info信息     |
- | com.hisen.log4j.log4j2MySQL.Log4jDemo | hisen  | 2017-03-21 14:42:27 | ERROR    | 这是方法中error信息    |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:27:16 | INFO     | 这是info信息           |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:27:16 | ERROR    | 这是error信息          |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:39:34 | INFO     | 这是info信息           |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:39:34 | ERROR    | 这是error信息          |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:42:27 | INFO     | 这是info信息           |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | main   | 2017-03-21 14:42:27 | ERROR    | 这是error信息          |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | hisen  | 2017-03-21 14:42:27 | INFO     | 这是方法中info信息     |
+ | com.hisen.jars.log4j.log4j2MySQL.Log4jDemo | hisen  | 2017-03-21 14:42:27 | ERROR    | 这是方法中error信息    |
  +---------------------------------------+--------+---------------------+----------+------------------------+
  14 rows in set
  */
