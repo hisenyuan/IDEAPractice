@@ -11,8 +11,10 @@ import org.junit.Test;
 public class AddData {
 
   private static String url = "jdbc:mysql://127.0.0.1:3306/hisen?user=root&password=hisen&useUnicode=true&characterEncoding=UTF8";
-  ;
 
+  /**
+   * 添加20万数据
+   */
   @Test
   public void addData() {
     Connection connect = DBUtils.getConnect(url);
