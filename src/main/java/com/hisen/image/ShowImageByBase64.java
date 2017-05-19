@@ -4,6 +4,7 @@ import com.hisen.utils.Base64Util;
 import com.hisen.utils.File2ByteArraysUtil;
 
 /**
+ * data:image/png;base64<img src="data:image/png;base64,<%=imageStr%>" alt="base64image"/>
  * Created by hisenyuan on 2017/5/11 at 18:44.
  */
 public class ShowImageByBase64 {
