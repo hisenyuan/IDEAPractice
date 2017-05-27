@@ -18,6 +18,7 @@ public class PipeliningTest {
 
   @Test
   public void pipleline() {
+    //通过jedis工具类获得jedis实例
     Jedis jedis = JedisUtil.getJedis();
     Map<String, String> data = new HashMap<>();
     jedis.select(8);
@@ -51,7 +52,7 @@ public class PipeliningTest {
 
     //hmget
     Set keys = jedis.keys("*");
-    //直接使用Jedis hgetall
+    //use Jedis hgetall
     long hmgetStart = System.currentTimeMillis();
     Map<String, Map<String, String>> stringMapMap = new HashMap<>();
     for (Object key : keys) {
@@ -62,7 +63,7 @@ public class PipeliningTest {
     System.out.println(
         "hgetAll without pipeline used [ " + (hmgetEnd - hmgetStart) + " ] millisecond ..");
 
-    //使用pipeline hgetall
+    //use pipeline hgetall
     Map<String, Response<Map<String, String>>> responses = new HashMap<String, Response<Map<String, String>>>(
         keys.size());
     stringMapMap.clear();
