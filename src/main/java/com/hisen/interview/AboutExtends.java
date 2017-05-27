@@ -19,7 +19,7 @@ public class AboutExtends {
     // Bstatic
     // I'm A class
     // I'm B class
-    // 1
+    // 0
     // B
 
     // 多态记忆口诀
