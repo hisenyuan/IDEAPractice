@@ -2,6 +2,7 @@ package com.hisen.jars.Jedis;
 
 import com.hisen.utils.JedisUtil;
 import java.util.List;
+import java.util.Set;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
 
@@ -102,11 +103,11 @@ public class TestCase {
     jedis.rpush("list", "I should look into this NOSQL thing ASAP");
     //jedis.lrange是按范围取出 key,start,end(-1 代表all)
     List<String> list = jedis.lrange("list", 0, -1);
-    for (String l:list){
+    for (String l : list) {
       System.out.println(l);
     }
     //清空数据
-    System.out.println("清除数据："+jedis.flushDB());
+    System.out.println("清除数据：" + jedis.flushDB());
     //添加数据
     jedis.lpush("lists", "vector");
     jedis.lpush("lists", "ArrayList");
@@ -129,5 +130,82 @@ public class TestCase {
     System.out.println(jedis.lpop("lists"));
     // 整个列表值
     System.out.println(jedis.lrange("lists", 0, -1));
+  }
+
+  /**
+   * Set集合
+   */
+  @Test
+  public void testSet() {
+    System.out.println("=====Set=====");
+    Jedis jedis = JedisUtil.getJedis();
+    jedis.sadd("myset", "1");
+    jedis.sadd("myset", "2");
+    jedis.sadd("myset", "3");
+    jedis.sadd("myset", "4");
+    Set<String> setValue = jedis.smembers("myset");
+    System.out.println(setValue);
+
+    //remove noname
+    jedis.srem("myset", "4");
+    //get all values
+    System.out.println("取出所有元素：" + jedis.smembers("myset"));
+    //checkout 4 in myset
+    System.out.println("判断是否存在：" + jedis.sismember("myset", "4"));
+    //get elements number
+    System.out.println("元素个数：" + jedis.scard("myset"));
+
+    System.out.println("清空数据库：" + jedis.flushDB());
+    jedis.sadd("sets", "HashSet");
+    jedis.sadd("sets", "SortedSet");
+    jedis.sadd("sets", "TreeSet");
+    System.out.println("判断是否存在：" + jedis.sismember("sets", "TreeSet"));
+    System.out.println("输出所有：" + jedis.smembers("sets"));
+    System.out.println("删除：" + jedis.srem("sets", "SortedSet"));
+    //出栈
+    System.out.println(jedis.spop("sets"));
+    System.out.println(jedis.smembers("sets"));
+    //添加多个集合
+    jedis.sadd("sets1", "HashSet1");
+    jedis.sadd("sets1", "SortedSet1");
+    jedis.sadd("sets1", "TreeSet");
+    jedis.sadd("sets2", "HashSet2");
+    jedis.sadd("sets2", "SortedSet1");
+    jedis.sadd("sets2", "TreeSet1");
+    //取出两个集合的交集
+    System.out.println("交集：" + jedis.sinter("sets1", "sets2"));
+    //并集
+    System.out.println("并集：" + jedis.sunion("sets1", "sets2"));
+    //差集
+    System.out.println("差集：" + jedis.sdiff("sets1", "sets2"));
+  }
+
+  /**
+   * 有序Set
+   */
+  @Test
+  public void sortedSet() {
+    System.out.println("==SoretedSet==");
+    Jedis jedis = JedisUtil.getJedis();
+    jedis.zadd("hackers", 1940, "Alan Kay");
+    jedis.zadd("hackers", 1906, "Grace Hopper");
+    jedis.zadd("hackers", 1953, "Richard Stallman");
+    jedis.zadd("hackers", 1965, "Yukihiro Mastsumoto");
+    jedis.zadd("hackers", 1916, "Claude Shannon");
+    jedis.zadd("hackers", 1969, "Linus Torvalds");
+    jedis.zadd("hackers", 1957, "Sophie Wilson");
+    jedis.zadd("hackers", 1912, "Alan Turing");
+    //输出
+    Set<String> setValues = jedis.zrange("hackers", 0, -1);
+    System.out.println("按索引递增：" + setValues);
+    Set<String> setValues2 = jedis.zrevrange("hackers", 0, -1);
+    System.out.println("按索引递减：" + setValues2);
+
+    System.out.println("元素个数：" + jedis.zcard("hackers"));
+    System.out.println("元素下标：" + jedis.zscore("hackers", "Alan Turing"));
+    System.out.println("集合子集：" + jedis.zrange("hackers", 0, -1));
+    System.out.println("删除元素：" + jedis.zrem("hackers", "Alan Turing"));
+    System.out.println("区间个数：" + jedis.zcount("hackers", 1960, 2000));
+    System.out.println("所有元素：" + jedis.zrange("hackers", 0, -1));
   }
 }
