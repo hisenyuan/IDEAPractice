@@ -1,4 +1,4 @@
-package com.hisen.json.fastjson.bean;
+package com.hisen.jars.json.fastjson.bean;
 
 import java.util.ArrayList;
 import java.util.List;

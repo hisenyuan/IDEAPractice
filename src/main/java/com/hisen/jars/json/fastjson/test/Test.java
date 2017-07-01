@@ -1,9 +1,9 @@
-package com.hisen.json.fastjson.test;
+package com.hisen.jars.json.fastjson.test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hisen.json.fastjson.bean.Group;
-import com.hisen.json.fastjson.bean.User;
+import com.hisen.jars.json.fastjson.bean.Group;
+import com.hisen.jars.json.fastjson.bean.User;
 
 /**
  * fastjson序列化和反序列化

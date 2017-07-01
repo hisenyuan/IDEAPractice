@@ -1,4 +1,4 @@
-package com.hisen.json.fastjson.bean;
+package com.hisen.jars.json.fastjson.bean;
 
 /**
  * Created by hisenyuan on 2017/3/22 at 17:48.

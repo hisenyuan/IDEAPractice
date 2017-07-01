@@ -1,4 +1,4 @@
-package com.hisen.json;
+package com.hisen.jars.json;
 
 import com.alibaba.fastjson.JSON;
 import java.util.HashMap;
