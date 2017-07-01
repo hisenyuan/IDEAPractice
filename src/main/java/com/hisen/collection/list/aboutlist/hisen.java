@@ -1,4 +1,4 @@
-package com.hisen.aboutlist;
+package com.hisen.collection.list.aboutlist;
 
 import java.util.ArrayList;
 import java.util.List;
