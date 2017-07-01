@@ -1,4 +1,4 @@
-package com.hisen.jiecheng;
+package com.hisen.digui;
 
 /**
  * 求 1!+2!+3! ....+n!
