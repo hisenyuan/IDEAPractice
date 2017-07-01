@@ -16,20 +16,20 @@ public class LinkedListTest {
     ll.add(4);
     ll.add(5);
     ll.add(6);
-
+    //测试LinkedList的方法：getFirst、getLast
     System.out.println("第一个元素：" + ll.getFirst());
     System.out.println("第一个元素：" + ll.getLast());
 
-    //获取链表元素
+    //遍历LinkedList中的元素
     for (Integer i : ll) {
       System.out.println(i);
     }
 
-    //从链表生成子链表
+    //从LinkedList链表生成子链表
     List sub = ll.subList(1, 4);
     System.out.println("从链表生成子链表:" + sub);
 
-    //不指定索引，会被添加到链表尾部
+    //LinkedList不指定索引，会被添加到链表尾部
     //可以作为队列或者堆栈使用
     ll.add(99);
     ll.addFirst(0);
