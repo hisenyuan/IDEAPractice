@@ -31,10 +31,11 @@ public class GetStockInformation {
     String[] keys = {"股票名字", "今日开盘价", "昨日收盘价", "当前价格", "今日最高价", "今日最低价", "买一报价", "卖一报价", "成交数量(百股)",
         "成交金额(元)", "买一数量(股)", "买一报价", "买二数量(股)", "买二报价", "买三数量(股)", "买三报价", "买四数量(股)", "买四报价",
         "买五数量(股)", "买五报价", "卖一数量(股)", "卖一报价", "卖二数量(股)", "卖二报价", "卖三数量(股)", "卖三报价", "卖四数量(股)",
-        "卖四报价", "卖五数量(股)", "卖五报价", "当前日期", "当前时间", "未知",};
+        "卖四报价", "卖五数量(股)", "卖五报价", "当前日期", "当前时间", "未知"};
     String s = Arrays.toString(stocks);
     String substring = s.substring(1, s.length() - 1).replace(" ", "");
     String strUrl = "http://hq.sinajs.cn/list=" + substring;
+    System.out.println(strUrl);
     URL ur = null;
     BufferedReader reader = null;
     List<List<String[]>> strList = new ArrayList<>();
