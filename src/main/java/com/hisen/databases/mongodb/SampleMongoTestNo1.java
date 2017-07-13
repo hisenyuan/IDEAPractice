@@ -37,7 +37,7 @@ public class SampleMongoTestNo1 {
   @Test
   public void testCreate(){
     DBObject obj = null;
-    for (int i = 1; i <= 10; i++) {
+    for (int i = 1; i <= 100000; i++) {
       obj = new BasicDBObject("_id",i).append("name","hisen"+i).append("age",i*5);
       dbCollection.save(obj);
     }
