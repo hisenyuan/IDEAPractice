@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ * 参考：http://www.cnblogs.com/xrq730/p/4919025.html
  * 测试Spring AOP
  * 在不倾入具体代码的情况下，增加方法执行前后的一些记录
  * Created by hisenyuan on 2017/7/26 at 13:49.
