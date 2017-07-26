@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+  <!--两个实现类-->
+  <bean id="helloWorldImpl1" class="com.hisen.jars.spring.aop.HelloWorldImpl1"/>
+  <bean id="helloWorldImpl2" class="com.hisen.jars.spring.aop.HelloWorldImpl2"/>
+  <!--两个切面-->
+  <bean id="timeHandler" class="com.hisen.jars.spring.aop.TimeHandler"/>
+  <bean id="logHandler" class="com.hisen.jars.spring.aop.LogHandler" />
+
+  <aop:config>
+    <aop:aspect id="time" ref="timeHandler">
+      <!--给所有方法都加上切面功能 - 打印时间 -->
+      <aop:pointcut id="addAllMethod" expression="execution(* com.hisen.jars.spring.aop.HelloWorld.*(..))"/>
+      <aop:before method="printTime" pointcut-ref="addAllMethod"/>
+      <aop:after method="printTime" pointcut-ref="addAllMethod"/>
+    </aop:aspect>
+    <!--order="2" 决定顺序-->
+    <aop:aspect id="log" ref="logHandler" order="2">
+      <!--给部分方法都加上切面功能 - 打印日志 execution：表示加入哪些方法 -->
+      <aop:pointcut id="printLog" expression="execution(* com.hisen.jars.spring.aop.HelloWorld..do*(..))" />
+      <aop:before method="LogBefore" pointcut-ref="printLog" />
+      <aop:after method="LogAfter" pointcut-ref="printLog" />
+    </aop:aspect>
+  </aop:config>
+</beans>
