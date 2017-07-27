@@ -151,6 +151,7 @@ public class CommonUsage {
    * @param filePath 文件名(包括路径)
    */
   public List<String> filesRead(String filePath) {
+    checkNotNull(filePath, "文件名称不能为空");
     File file = new File(filePath);
     List<String> list = null;
     try {
