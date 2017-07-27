@@ -20,6 +20,7 @@ import org.junit.Test;
 
 /**
  * Google guava常用的一些方法
+ * http://blog.csdn.net/yyychyzzzz/article/details/54983574
  * Created by hisenyuan on 2017/7/27 at 15:56.
  */
 public class CommonUsage {
