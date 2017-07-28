@@ -51,8 +51,6 @@ public class CommonUsage {
     System.out.println(s);//a=1,b=2,c=3
   }
 
-
-
   /**
    * 3.将String 转为特定的集合
    */
