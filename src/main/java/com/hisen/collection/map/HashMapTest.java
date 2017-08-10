@@ -12,9 +12,40 @@ import org.junit.Test;
  * HashMap是基于哈希表
  * 允许使用null为key和null为value（与HashTable的大致区别在此）
  * 不保证映射的顺序，可能每次都会变动
+ * 底层实现：数组 里面存 链表
  */
 public class HashMapTest {
 
+  /**
+   * HashMap自带方法
+   */
+  @Test
+  public void testFunction(){
+    Map<String, String> map = new HashMap<>();
+    //插入数据
+    for (int i = 0; i < 10; i++) {
+      map.put(String.valueOf(i), "hisen" + i);
+    }
+    //返回key的集合
+    Set<String> set = map.keySet();
+    System.out.println(set);
+    //[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    //返回所有的entry(map中的键值对)
+    Set<Entry<String, String>> entries = map.entrySet();
+    System.out.println(entries);
+    //[0=hisen0, 1=hisen1, 2=hisen2, 3=hisen3, 4=hisen4, 5=hisen5, 6=hisen6, 7=hisen7, 8=hisen8, 9=hisen9]
+
+    //判断是否包含Key
+    boolean b = map.containsKey("0");
+    System.out.println(b);
+    //清空map
+    map.clear();
+
+  }
+  /**
+   * 遍历
+   */
   @Test
   public void testHashMap() {
     Map<String, String> map = new HashMap<>();
