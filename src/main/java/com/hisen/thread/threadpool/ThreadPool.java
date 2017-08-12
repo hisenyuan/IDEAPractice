@@ -22,14 +22,8 @@ public final class ThreadPool {
   private static ThreadPool threadPool;
 
   /**
-   * 默认启动5个
-   */
-  private ThreadPool() {
-    this(5);
-  }
-
-  /**
    * 创建线程池
+   *
    * @param worker_num 指定容量
    */
   private ThreadPool(int worker_num) {
@@ -43,15 +37,15 @@ public final class ThreadPool {
   }
 
   /**
-   * 获得默认线程个数的线程池
-   * @return 返回5个线程容量的线程池
+   * 默认启动5个
    */
-  public static ThreadPool getThreadPool() {
-    return getThreadPool(ThreadPool.worker_num);
+  private ThreadPool() {
+    this(5);
   }
 
   /**
    * 获得一个指容量的线程池
+   *
    * @param worker_num_1 线程池容量
    * @return 返回一个线程池
    */
@@ -66,7 +60,18 @@ public final class ThreadPool {
   }
 
   /**
+   * 获得默认线程个数的线程池
+   *
+   * @return 返回5个线程容量的线程池
+   */
+  public static ThreadPool getThreadPool() {
+    return getThreadPool(ThreadPool.worker_num);
+  }
+
+
+  /**
    * 执行任务（把任务加入任务队列，什么时候执行由线程池管理）
+   *
    * @param task 传入单个任务
    */
   public void execute(Runnable task) {
@@ -78,6 +83,7 @@ public final class ThreadPool {
 
   /**
    * 执行任务（把任务加入任务队列，什么时候执行由线程池管理）
+   *
    * @param task 传入一个任务数组
    */
   public void execute(Runnable[] task) {
@@ -179,6 +185,7 @@ public final class ThreadPool {
 
   /**
    * 返回已完成任务的个数,这里的已完成是只出了任务队列的任务个数，可能该任务并没有实际执行完成
+   *
    * @return 返回已完成任务的个数
    */
   public int getFinishedTasknumber() {
