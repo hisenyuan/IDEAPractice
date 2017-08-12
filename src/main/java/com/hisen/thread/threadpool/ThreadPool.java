@@ -10,7 +10,7 @@ import java.util.List;
  */
 public final class ThreadPool {
 
-  // 线程池中默认线程个数
+  // 线程池默认容量
   private static int worker_num = 5;
   // 工作线程
   private WorkerThread[] workerThreads;
@@ -21,12 +21,17 @@ public final class ThreadPool {
   // 自身实例
   private static ThreadPool threadPool;
 
-  // 默认启动5个
+  /**
+   * 默认启动5个
+   */
   private ThreadPool() {
     this(5);
   }
 
-  // 创建线程池,worker_num为线程池中工作线程的个数
+  /**
+   * 创建线程池
+   * @param worker_num 指定容量
+   */
   private ThreadPool(int worker_num) {
     ThreadPool.worker_num = worker_num;
     workerThreads = new WorkerThread[worker_num];
@@ -37,12 +42,19 @@ public final class ThreadPool {
     }
   }
 
-  // 获得默认线程个数的线程池
+  /**
+   * 获得默认线程个数的线程池
+   * @return 返回5个线程容量的线程池
+   */
   public static ThreadPool getThreadPool() {
     return getThreadPool(ThreadPool.worker_num);
   }
 
-  // 获得一个指定工作线程数的线程池
+  /**
+   * 获得一个指容量的线程池
+   * @param worker_num_1 线程池容量
+   * @return 返回一个线程池
+   */
   public static ThreadPool getThreadPool(int worker_num_1) {
     if (worker_num <= 0) {
       worker_num = ThreadPool.worker_num;
@@ -53,7 +65,10 @@ public final class ThreadPool {
     return threadPool;
   }
 
-  // 执行任务（把任务加入任务队列，什么时候执行由线程池管理）
+  /**
+   * 执行任务（把任务加入任务队列，什么时候执行由线程池管理）
+   * @param task 传入单个任务
+   */
   public void execute(Runnable task) {
     synchronized (taskQueue) {
       taskQueue.add(task);
@@ -61,7 +76,10 @@ public final class ThreadPool {
     }
   }
 
-  // 执行任务（把任务加入任务队列，什么时候执行由线程池管理）
+  /**
+   * 执行任务（把任务加入任务队列，什么时候执行由线程池管理）
+   * @param task 传入一个任务数组
+   */
   public void execute(Runnable[] task) {
     synchronized (taskQueue) {
       for (Runnable r : task) {
@@ -71,7 +89,9 @@ public final class ThreadPool {
     }
   }
 
-  // 批量执行任务,其实只是把任务加入任务队列，什么时候执行由线程池管理器决定
+  /**
+   * 批量执行任务,其实只是把任务加入任务队列，什么时候执行由线程池管理器决定
+   */
   public void execute(List<Runnable> task) {
     synchronized (taskQueue) {
       for (Runnable t : task) {
@@ -81,6 +101,9 @@ public final class ThreadPool {
     }
   }
 
+  /**
+   * 销毁线程池
+   */
   public void destory() {
     while (!taskQueue.isEmpty()) {
       try {
@@ -139,23 +162,32 @@ public final class ThreadPool {
       }
     }
 
-    // 停止工作，让该线程自然执行完run方法，自然结束
+    /**
+     * 停止工作，让该线程自然执行完run方法，自然结束
+     */
     public void stopWorker() {
       isRunning = false;
     }
   }
 
-  // 返回工作线程的个数
+  /**
+   * @return 返回工作线程的个数
+   */
   public int getWorkThreadNumber() {
     return worker_num;
   }
 
-  // 返回已完成任务的个数,这里的已完成是只出了任务队列的任务个数，可能该任务并没有实际执行完成
+  /**
+   * 返回已完成任务的个数,这里的已完成是只出了任务队列的任务个数，可能该任务并没有实际执行完成
+   * @return 返回已完成任务的个数
+   */
   public int getFinishedTasknumber() {
     return finished_task;
   }
 
-  // 返回等待的任务个数
+  /**
+   * @return 返回等待的任务个数
+   */
   public int getWaitTasknumber() {
     return taskQueue.size();
   }
