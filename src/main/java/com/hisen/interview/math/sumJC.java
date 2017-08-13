@@ -1,4 +1,4 @@
-package com.hisen.digui;
+package com.hisen.interview.math;
 
 /**
  * 求 1!+2!+3! ....+n!
