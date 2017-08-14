@@ -38,7 +38,16 @@ public class HashMapTest {
 
     //判断是否包含Key
     boolean b = map.containsKey("0");
-    System.out.println(b);
+    System.out.println(b); //true
+
+    //判断是否包含value
+    boolean hisen0 = map.containsValue("hisen");
+    System.out.println(hisen0); //false
+
+    //lambda表达式:判断特定的key，然后可以对value做指定的操作，返回处理后的value
+    String compute = map.compute("0", (k, v) -> (v == null) ? "1" : v.concat("1"));
+    System.out.println(compute);//hisen01
+
     //清空map
     map.clear();
 
