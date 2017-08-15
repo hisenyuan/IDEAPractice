@@ -9,7 +9,7 @@ public class AboutExtends {
 
   public static void main(String[] args) {
     // 里面的static块方法，new了就会执行
-    // new new B()两个都执行，new new A()执行A的
+    // new B()两个都执行，new A()执行A的
     // static代码块在{}代码块后面执行
     A classA = new B();
     System.out.println(classA.a);
