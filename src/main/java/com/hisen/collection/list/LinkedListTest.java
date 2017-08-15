@@ -49,7 +49,7 @@ public class LinkedListTest {
 
     //使用链表实现队列效果
     System.out.println("---------------使用链表实现队列效果----------------");
-    Queue queue = new Queue();
+    QueueL queue = new QueueL();
     for (int i = 0; i < 10; i++) {
       queue.put(Integer.toString(i));
     }
@@ -85,7 +85,7 @@ public class LinkedListTest {
    *
    * @author hisenyuan 2017年1月14日    下午4:55:52
    */
-  static class Queue {
+  static class QueueL {
 
     private LinkedList list = new LinkedList();
 
