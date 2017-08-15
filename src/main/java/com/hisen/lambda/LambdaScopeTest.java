@@ -19,6 +19,7 @@ public class LambdaScopeTest {
       Consumer<Integer> myConsumer = (y)->{
         System.out.println("x = " + x);
         System.out.println("y = " + y);
+//        在lambda中，this不是指向lambda表达式产生的那个SAM对象，而是声明它的外部对象。
         System.out.println("this.x = " + this.x);
         System.out.println("LambdaScopeTest.this.x = " + LambdaScopeTest.this.x);
       };
