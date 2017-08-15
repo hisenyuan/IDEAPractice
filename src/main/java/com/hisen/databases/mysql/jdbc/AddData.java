@@ -1,4 +1,4 @@
-package com.hisen.jars.jdbc;
+package com.hisen.databases.mysql.jdbc;
 
 import java.sql.Connection;
 import java.sql.SQLException;
