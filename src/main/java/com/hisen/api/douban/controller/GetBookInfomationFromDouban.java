@@ -28,6 +28,7 @@ public class GetBookInfomationFromDouban {
     Book book = JSON.parseObject(bookInformation, Book.class);
     logger.info("json数据转对象:"+JSON.toJSONString(book));
     logger.info("作者:"+book.getAuthor());
+    logger.info("链接:"+book.getAlt());
   }
   /**
    * 根据id获取豆瓣信息
@@ -41,7 +42,6 @@ public class GetBookInfomationFromDouban {
     CloseableHttpClient client = HttpClientBuilder.create().build();
     HttpGet request = new HttpGet(apiUrl);
     StringBuilder stringBuilder = new StringBuilder();
-
     try {
       CloseableHttpResponse response = client.execute(request);
       HttpEntity entity = response.getEntity();
