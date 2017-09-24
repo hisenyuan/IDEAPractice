@@ -23,7 +23,7 @@ public class GetBookInfomationFromDouban {
 
   @Test
   public void getBook(){
-    String bookInformation = getBookInformation("26665230");
+    String bookInformation = getBookInformation("26665630");
     logger.info("返回的json数据:"+bookInformation);
     Book book = JSON.parseObject(bookInformation, Book.class);
     logger.info("json数据转对象:"+JSON.toJSONString(book));
@@ -47,10 +47,10 @@ public class GetBookInfomationFromDouban {
       HttpEntity entity = response.getEntity();
       String responseStr = EntityUtils.toString(entity, "utf-8");
       stringBuilder.append(responseStr);
-      logger.info("[结束] - [出参]" + id);
     } catch (IOException e) {
       e.printStackTrace();
     }
+    logger.info("[结束] - [出参]" + stringBuilder.toString());
     return stringBuilder.toString();
   }
 }
