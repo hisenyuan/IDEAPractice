@@ -24,9 +24,10 @@ public class JavaClipboard {
         return text;
       }
     } catch (UnsupportedFlavorException e) {
-      // System.out.println("Error tip: "+e.getMessage());
+       System.out.println("Error tip: "+e.getMessage());
     } catch (IOException e) {
-    } // System.out.println("Error tip: "+e.getMessage());
+      System.out.println("Error tip: "+e.getMessage());
+    }
     return null;
   }
 
