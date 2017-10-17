@@ -8,11 +8,11 @@ import java.util.Arrays;
 public class MoveElement {
 
   public static void main(String[] args) {
-    int arr[] = {0, 0, 1, 0, 3, 5, 0, 6, 7};
-    System.out.println("移动前:" + Arrays.toString(arr));
+    int[] array = {0, 0, 1, 0, 3, 5, 0, 6, 7};
+    System.out.println("移动前:" + Arrays.toString(array));
     // 移动前:[0, 0, 1, 0, 3, 5, 0, 6, 7]
-    mv(arr);
-    System.out.println("移动后:" + Arrays.toString(arr));
+    mv(array);
+    System.out.println("移动后:" + Arrays.toString(array));
     // 移动后:[1, 3, 5, 6, 7, 0, 0, 0, 0]
   }
 
@@ -21,7 +21,7 @@ public class MoveElement {
    *
    * @param arr 传入的数组
    */
-  static void mv(int arr[]) {
+  static void mv(int[] arr) {
     int i = -1, j, temp;
 
     for (j = 0; j < arr.length; j++) {
