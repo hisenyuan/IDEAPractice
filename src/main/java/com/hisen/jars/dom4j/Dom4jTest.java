@@ -45,7 +45,7 @@ public class Dom4jTest {
 
 	public void test() throws Exception {
 		SAXReader reader = new SAXReader();
-		Document document = reader.read(new File("src/main/java/com/hisen/jars/dom4j/test.xml"));
+		Document document = reader.read(new File("src/main/java/com/hisen/jars/dom4j/Get_GCD_LCM.xml"));
 		Element root = document.getRootElement();
 		listNodes(root);
 	}
