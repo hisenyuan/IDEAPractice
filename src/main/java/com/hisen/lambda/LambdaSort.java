@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LambdaSort {
 
   public static void main(String[] args) {
-    List<String> list = Arrays.asList("hisen", "test", "work", "name", "apple");
+    List<String> list = Arrays.asList("hisen", "Get_GCD_LCM", "work", "name", "apple");
     //利用lambda语法
     Collections.sort(list, (o1, o2) -> o1.compareTo(o2));
     for (String s : list) {
