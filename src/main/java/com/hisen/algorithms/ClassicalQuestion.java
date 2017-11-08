@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * @author : yhx
  * @date : 2017/11/8 23:51
- * @descriptor :
+ * @descriptor : 一些简单经典的算法问题
  */
 public class ClassicalQuestion {
 
@@ -70,8 +70,7 @@ public class ClassicalQuestion {
       int powX = (int) Math.pow(x, 3);
       int powY = (int) Math.pow(y, 3);
       int powZ = (int) Math.pow(z, 3);
-      int f = (powX + powY + powZ);
-      if (n == f) {
+      if (n == (powX + powY + powZ)) {
         System.out.println(
             n + "=" + x + cube + "+" + y + cube + "+" + z + cube + "=" + powX + "+" + powY + "+"
                 + powZ);
