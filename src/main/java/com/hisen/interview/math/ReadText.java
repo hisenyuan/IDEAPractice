@@ -19,7 +19,7 @@ public class ReadText {
 
   public static void main(String[] args) {
     //相对路径下 前面没有 /
-    String file = "src/com/hisen/text/test.txt";
+    String file = "src/com/hisen/text/Get_GCD_LCM.txt";
     function1(file);//会乱码
     System.out.println("--------------------左边跟右边不一样长--------------------");
     function2(file);//不会乱码

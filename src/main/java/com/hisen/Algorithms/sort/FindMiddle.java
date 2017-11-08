@@ -1,4 +1,4 @@
-package com.hisen.sort;
+package com.hisen.Algorithms.sort;
 
 import java.util.Random;
 

@@ -105,7 +105,7 @@ public class CommonUsage {
    */
   @Test
   public void filesOperation() {
-    String fileName = "./src/main/java/com/hisen/jars/guava/test.txt";
+    String fileName = "./src/main/java/com/hisen/jars/guava/Get_GCD_LCM.txt";
     for (int i = 0; i < 1000; i++) {
       //写
       filesWrite(fileName, String.valueOf(i) + "\n");

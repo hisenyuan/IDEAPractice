@@ -33,8 +33,8 @@ public class Mybatis3 {
     // 第一个参数：映射文件中statement的id，等于=namespace+"."+statement的id
     // 第二个参数：指定和映射文件中所匹配的parameterType类型的参数
     // sqlSession.selectOne结果 是与映射文件中所匹配的resultType类型的对象
-    // selectOne查询出一条记录.test对应 <mapper namespace="test">
-    User user = sqlSession.selectOne("test.findUserById", 1);
+    // selectOne查询出一条记录.test对应 <mapper namespace="Get_GCD_LCM">
+    User user = sqlSession.selectOne("Get_GCD_LCM.findUserById", 1);
 
     System.out.println(user);
 
@@ -58,7 +58,7 @@ public class Mybatis3 {
     // 通过工厂得到SqlSession
     SqlSession sqlSession = sqlSessionFactory.openSession();
     // list中的user和映射文件中resultType所指定的类型一致
-    List<User> list = sqlSession.selectList("test.findUserByName", "小明");
+    List<User> list = sqlSession.selectList("Get_GCD_LCM.findUserByName", "小明");
     System.out.println(list);
     sqlSession.close();
 
@@ -81,7 +81,7 @@ public class Mybatis3 {
     user.setBirthday(new Date());
     user.setSex("1");
     user.setAddress("河南郑州");
-    sqlSession.insert("test.insertUser", user);
+    sqlSession.insert("Get_GCD_LCM.insertUser", user);
     // 提交事务
     sqlSession.commit();
     // 获取用户信息主键
@@ -102,7 +102,7 @@ public class Mybatis3 {
     // 通过工厂得到SqlSession
     SqlSession sqlSession = sqlSessionFactory.openSession();
     // 传入id删除 用户
-    sqlSession.delete("test.deleteUser", 29);
+    sqlSession.delete("Get_GCD_LCM.deleteUser", 29);
     // 提交事务
     sqlSession.commit();
     // 关闭会话
@@ -128,7 +128,7 @@ public class Mybatis3 {
     user.setBirthday(new Date());
     user.setSex("2");
     user.setAddress("河南郑州");
-    sqlSession.update("test.updateUser", user);
+    sqlSession.update("Get_GCD_LCM.updateUser", user);
     // 提交事务
     sqlSession.commit();
     // 关闭会话

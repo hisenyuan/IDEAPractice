@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
   @Override
   public User findUserById(int id) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
-    User user = sqlSession.selectOne("test.findUserById", id);
+    User user = sqlSession.selectOne("Get_GCD_LCM.findUserById", id);
     //释放资源
     sqlSession.close();
     return user;
@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
   @Override
   public List<User> findUserByName(String name) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
-    List<User> list = sqlSession.selectList("test.findUserByName", name);
+    List<User> list = sqlSession.selectList("Get_GCD_LCM.findUserByName", name);
     // 释放资源
     sqlSession.close();
     return list;
@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
   public void insertUser(User user) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     //执行插入操作
-    sqlSession.insert("test.insertUser", user);
+    sqlSession.insert("Get_GCD_LCM.insertUser", user);
     // 提交事务
     sqlSession.commit();
     // 释放资源
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
   public void deleteUser(int id) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     //执行插入操作
-    sqlSession.delete("test.deleteUser", id);
+    sqlSession.delete("Get_GCD_LCM.deleteUser", id);
     // 提交事务
     sqlSession.commit();
     // 释放资源
