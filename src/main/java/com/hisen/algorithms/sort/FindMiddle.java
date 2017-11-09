@@ -40,41 +40,43 @@ public class FindMiddle {
    */
   public static void HeapSort(int[] a) {
     int i;
-    /* 把a中的r构建成一个大顶堆 */
+    /** 把a中的r构建成一个大顶堆 **/
     for (i = a.length / 2; i > 0; i--) {
       HeapAdjust(a, i, a.length - 1);
     }
     for (i = a.length - 1; i >= 0; i--) {
-      Swap(a, 1, i);
+      swap(a, 1, i);
       HeapAdjust(a, 1, i - 1);
     }
   }
 
-  /* 调整a[s] 的关键字，使a[s....m]成为一个大顶堆 */
+  /**
+   * 调整a[s] 的关键字，使a[s....m]成为一个大顶堆
+   **/
   public static void HeapAdjust(int[] a, int s, int m) {
     int temp, j;
     temp = a[s];
-    /* 沿关键字较大的孩子节点向下筛选 */
+    /** 沿关键字较大的孩子节点向下筛选 **/
     for (j = 2 * s; j < m; j *= 2) {
-      if (j < m && a[j] < a[j + 1])
-        /* j为关键字中较大记录的下标 */ {
+      if (j < m && a[j] < a[j + 1]){
+      /** j为关键字中较大记录的下标 **/
         ++j;
       }
-      if (temp >= a[j])
-				/* 应该插入在s位置 */ {
+      if (temp >= a[j]){
+      /** 应该插入在s位置 **/
         break;
       }
       a[s] = a[j];
       s = j;
     }
-		/* 插入 */
+    /** 插入 **/
     a[s] = temp;
   }
 
-  /*
+  /**
    * 数组数据交换
    */
-  public static void Swap(int[] a, int i, int j) {
+  public static void swap(int[] a, int i, int j) {
     int temp = a[i];
     a[i] = a[j];
     a[j] = temp;
