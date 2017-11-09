@@ -27,7 +27,7 @@ public class DynamicProxyMain {
     // 我们要代理那个对象，就把这个对象传进去，最后是通过该对象来调用其他方法
     InvocationHandler handler = new DynamicProxy(customser);
     // 简单的模拟，于是这里顾客是直接买车的，没有通过4S店
-    BuyCar buyCar = (BuyCar) Proxy.newProxyInstance(handler.getClass().getClassLoader(),customser.getClass().getInterfaces(),handler);
-    buyCar.buyCar();
+    BuyCar buyCarHandler = (BuyCar) Proxy.newProxyInstance(handler.getClass().getClassLoader(),customser.getClass().getInterfaces(),handler);
+    buyCarHandler.buyCar();
   }
 }
