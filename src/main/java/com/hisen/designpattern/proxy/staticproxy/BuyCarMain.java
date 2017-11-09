@@ -7,6 +7,10 @@ package com.hisen.designpattern.proxy.staticproxy;
  */
 public class BuyCarMain {
 
+  /**
+   * 通过代理模式可以方便的对一些现有方法进行扩展
+   * @param args
+   */
   public static void main(String[] args) {
     Customser customser = new Customser();
     customser.setCash(10000);

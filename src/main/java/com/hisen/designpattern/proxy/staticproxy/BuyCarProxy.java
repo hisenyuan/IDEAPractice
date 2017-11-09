@@ -18,6 +18,10 @@ public class BuyCarProxy implements BuyCar{
    */
   @Override
   public void buyCar() {
+    // 实现权限控制
+    if (customser.getCash()<100000){
+      System.out.println("您的购车款不足！");
+    }
     customser.buyCar();
   }
 }
