@@ -6,6 +6,7 @@ package com.hisen.designpattern.simplefactory;
  */
 public class OperationDiv extends Opreation {
 
+  @Override
   public double getResult() {
     double result = 0;
     if (getNumberB() == 0) {
