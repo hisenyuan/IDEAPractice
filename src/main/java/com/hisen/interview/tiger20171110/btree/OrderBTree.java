@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * @author : yhx
  * @date : 2017/11/13 12:15
- * @descriptor :
+ * @descriptor : 二叉树的遍历实体类
  */
 public class OrderBTree implements Visit {
 
