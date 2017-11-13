@@ -3,7 +3,7 @@ package com.hisen.interview.tiger20171110.btree;
 /**
  * @author : yhx
  * @date : 2017/11/13 12:21
- * @descriptor : 测试二叉树的遍历，以及实现
+ * @descriptor : 测试 - 二叉树的构造与遍历
  */
 public class BTreeMain {
 
