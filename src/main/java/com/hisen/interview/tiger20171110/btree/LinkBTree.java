@@ -3,7 +3,7 @@ package com.hisen.interview.tiger20171110.btree;
 /**
  * @author : yhx
  * @date : 2017/11/10 18:42
- * @descriptor : 二叉树的 - 二叉链表实现
+ * @descriptor : 二叉树的链表实现 - 二叉树的构造与遍历
  */
 public class LinkBTree implements BTree {
 
