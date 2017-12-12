@@ -6,6 +6,9 @@
   <artifactId>IDEAPractice</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>hisen-shiro-demo</module>
+  </modules>
   <name>IDEAPractice Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -260,6 +263,11 @@
       <artifactId>jjwt</artifactId>
       <version>0.9.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.alibaba.rocketmq</groupId>
+      <artifactId>rocketmq-common</artifactId>
+      <version>3.2.6</version>
+    </dependency>
   </dependencies>
 
 
@@ -295,8 +303,7 @@
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
+          <include>**/*.*</include>
         </includes>
       </resource>
     </resources>
