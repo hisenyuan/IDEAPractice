@@ -37,6 +37,7 @@ public class JedisUtil {
       JedisPoolConfig config = new JedisPoolConfig();
       //此处可以封装
       config.setMaxIdle(10);
+      config.setMaxTotal(1000);
       config.setMaxWaitMillis(1000);
       pool = new JedisPool(config, ip, port, 3000);
       maps.put(key, pool);
