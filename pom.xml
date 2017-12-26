@@ -273,6 +273,11 @@
       <artifactId>amqp-client</artifactId>
       <version>5.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>3.4.8</version>
+    </dependency>
   </dependencies>
 
 
