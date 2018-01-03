@@ -117,7 +117,7 @@ public class ZooKeeperTest implements Watcher {
       ZooKeeperTest create = new ZooKeeperTest();
       create.connect("192.168.1.174:2281");
       String path = "/cn/hisenyuan/test1";
-      // 创建节点
+      // 创建节点 只能操作一次
 //      create.createZNode("cn");
 //      create.createZNode("cn/hisenyuan");
 //      create.createZNode("cn/hisenyuan/test1");
