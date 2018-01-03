@@ -1,6 +1,7 @@
 package com.hisen.jars.zookeeper;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import org.apache.zookeeper.CreateMode;
@@ -49,14 +50,27 @@ public class ZooKeeperTest implements Watcher {
 
 
   /**
-   * 创建zk节点
+   * 创建节点 - 支持传入多级节点
+   * @param node
+   * @throws Exception
    */
-  public void createZNode(String zNode) throws Exception {
-    String path = "/" + zNode;
-    // 创建没有数据的节点
-    String createPath =
-        zk.create(path, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-    System.out.println(createPath);
+  public void createZNode(String node){
+    Preconditions.checkNotNull(node);
+    String[] nodes = node.substring(1).split("/");
+    String path = "";
+    for (int i = 0; i < nodes.length; i++) {
+      path = path + "/" + nodes[i];
+      try {
+        // 创建没有数据的节点
+        String createPath  = zk.create(path, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        System.out.println("第" + i + "次,创建的path=" + createPath);
+      } catch (KeeperException e) {
+        e.printStackTrace();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
 
   /**
@@ -96,7 +110,7 @@ public class ZooKeeperTest implements Watcher {
   }
 
   /**
-   * 删除节点
+   * 删除单个节点（最后）
    *
    * @param path 节点的路径
    */
@@ -118,10 +132,7 @@ public class ZooKeeperTest implements Watcher {
       create.connect("192.168.1.174:2281");
       String path = "/cn/hisenyuan/test1";
       // 创建节点 只能操作一次
-//      create.createZNode("cn");
-//      create.createZNode("cn/hisenyuan");
-//      create.createZNode("cn/hisenyuan/test1");
-
+      create.createZNode(path);
 
       // 存放list到zk
       ArrayList<Integer> integers = new ArrayList<>();
@@ -145,6 +156,9 @@ public class ZooKeeperTest implements Watcher {
 
       // 查看节点的数据
       System.out.println(create.getData(path));
+
+      // 删除节点根节点
+      create.deleteNode("/cn");
       create.closeZk();
     } catch (Exception e) {
       e.printStackTrace();
