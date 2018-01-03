@@ -1,5 +1,7 @@
 package com.hisen.jars.zookeeper;
 
+import com.alibaba.fastjson.JSON;
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
@@ -12,9 +14,9 @@ import org.apache.zookeeper.data.Stat;
 /**
  * @author hisenyuan
  * @time 2017/12/26 17:41
- * @description
+ * @description zookeeper相关操作
  */
-public class CreateNode implements Watcher {
+public class ZooKeeperTest implements Watcher {
 
   //超时时间
   private static final int SESSION_TIMEOUT = 5000;
@@ -59,6 +61,7 @@ public class CreateNode implements Watcher {
 
   /**
    * 设置节点的数据
+   *
    * @param path 节点的路径
    * @param data 节点的数据
    */
@@ -75,13 +78,32 @@ public class CreateNode implements Watcher {
   }
 
   /**
+   * 获取内容
+   */
+  public String getData(String path) {
+    String value = null;
+    try {
+      Stat stat = zk.exists(path, false);
+      // 同步获取
+      byte[] data = zk.getData(path, true, stat);
+      value = new String(data);
+    } catch (KeeperException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    return value;
+  }
+
+  /**
    * 删除节点
+   *
    * @param path 节点的路径
    */
-  public void deleteNode(String path){
+  public void deleteNode(String path) {
     try {
       Stat exists = zk.exists(path, false);
-      zk.delete(path,exists.getVersion());
+      zk.delete(path, exists.getVersion());
     } catch (KeeperException e) {
       e.printStackTrace();
     } catch (InterruptedException e) {
@@ -92,17 +114,37 @@ public class CreateNode implements Watcher {
 
   public static void main(String[] args) {
     try {
-
-      CreateNode create = new CreateNode();
+      ZooKeeperTest create = new ZooKeeperTest();
       create.connect("192.168.1.174:2281");
+      String path = "/cn/hisenyuan/test1";
       // 创建节点
-//      create.createZNode("root");
-//      create.createZNode("sms");
-//      create.createZNode("reg");
-      // 设置节点的数据
-//      create.setData("/root/sms/reg","{\"all\":\"^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\\\d{8}$\",\"chinamobile\":\"^(1(3[4-9]|5[0124789]|7[28]|8[23478])\\\\d{8}$)|(170[356]\\\\d{7}$)|(147\\\\d{8}$)\",\"telcom\":\"^(18[019]\\\\d{8})|(17[37]\\\\d{8})|(133\\\\d{8})|(153\\\\d{8})|(170[01]\\\\d{7})|(1349\\\\d{7}$)\",\"unicom\":\"^(1(3[0-2]|5[56]|8[56])\\\\d{8}$)|17[56]\\\\d{8}$|((170[789]|1713|1715|1716|1717|1718|1719)\\\\d{7}$)|(145\\\\d{8}$)\"}");
-//      create.setData("/root/sms/channel", "192.168.1.174");
-      create.deleteNode("/apps/hisen");
+//      create.createZNode("cn");
+//      create.createZNode("cn/hisenyuan");
+//      create.createZNode("cn/hisenyuan/test1");
+
+
+      // 存放list到zk
+      ArrayList<Integer> integers = new ArrayList<>();
+      integers.add(1);
+      integers.add(2);
+      integers.add(3);
+      integers.add(4);
+      integers.add(5);
+      String value = JSON.toJSONString(integers);
+      System.out.println("存放在zk上的值：" + value);
+      create.setData(path, value);
+
+      // 获取节点的值，更改
+      String data = create.getData(path);
+      System.out.println("获取到zk上的值：" + data);
+      ArrayList list = JSON.parseObject(data, ArrayList.class);
+      list.remove(0);
+      String value1 = JSON.toJSONString(list);
+      System.out.println("存放在zk上的值：" + value1);
+      create.setData(path, value1);
+
+      // 查看节点的数据
+      System.out.println(create.getData(path));
       create.closeZk();
     } catch (Exception e) {
       e.printStackTrace();
