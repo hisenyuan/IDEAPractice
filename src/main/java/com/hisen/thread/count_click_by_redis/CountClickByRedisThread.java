@@ -2,7 +2,7 @@ package com.hisen.thread.count_click_by_redis;
 
 /**
  * @author hisenyuan
- * @description 执行点击的线程类
+ * @description 执行点击的线程
  */
 public class CountClickByRedisThread extends Thread{
 
