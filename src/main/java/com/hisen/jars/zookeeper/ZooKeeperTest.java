@@ -11,6 +11,7 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
+import org.junit.Test;
 
 /**
  * @author hisenyuan
@@ -163,5 +164,11 @@ public class ZooKeeperTest implements Watcher {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+  @Test
+  public void testSet() throws Exception {
+    ZooKeeperTest zk = new ZooKeeperTest();
+    zk.connect("192.168.1.174:2281");
+    zk.setData("/root/sms/channelConfig","[{\"fee_type\":1,\"fee_user_type\":0,\"host\":\"smpp.heysky.com\",\"identify\":\"ccrfvl\",\"identifyValue\":\"7BRnlu3V\",\"maxConnection\":15,\"name\":\"smppChannel\",\"port\":9901,\"protocol\":\"SMPP\",\"protocolVersion\":\"3\",\"windowSize\":16}]");
   }
 }
