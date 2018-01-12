@@ -57,7 +57,7 @@ public class HashMapTest {
    */
   @Test
   public void testHashMap() {
-    Map<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>(16);
     //插入数据
     for (int i = 0; i < 10; i++) {
       map.put(String.valueOf(i), "hisen" + i);
@@ -91,6 +91,7 @@ public class HashMapTest {
       String value = entry.getValue();
       System.out.printf("第一种遍历方式：%s:%s\n", key, value);
     }
+    System.out.println("----------分隔符----------");
     //2. 显示调用map.entrySet()的集合迭代器
     Iterator<Entry<String, String>> iterator2 = map.entrySet().iterator();
     while (iterator2.hasNext()) {
@@ -99,6 +100,7 @@ public class HashMapTest {
       String value = entry.getValue();
       System.out.printf("第二种遍历方式：%s:%s\n", key, value);
     }
+    System.out.println("----------分隔符----------");
     //3.for each map.keySet()，再调用get获取
     for (String key : map.keySet()) {
       String value = map.get(key);
@@ -111,6 +113,10 @@ public class HashMapTest {
       String value = entry.getValue();
       System.out.printf("第四种遍历方式：%s:%s\n", key, value);
     }
-
+    System.out.println("----------分隔符----------");
+    //5. JDK8新方式遍历map
+    map.forEach((k,v)->{
+      System.out.printf("第五种遍历方式：%s:%s\n", k, v);
+    });
   }
 }
