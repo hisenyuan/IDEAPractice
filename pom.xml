@@ -6,6 +6,9 @@
   <artifactId>IDEAPractice</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>hisen-shiro-demo</module>
+  </modules>
   <name>IDEAPractice Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -137,11 +140,6 @@
       <version>1.6</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>3.14-beta1</version>
-    </dependency>
-    <dependency>
       <groupId>com.sun.jdmk</groupId>
       <artifactId>jmxtools</artifactId>
       <version>1.2.1</version>
@@ -254,7 +252,44 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
-
+    <!--JWT-->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.rocketmq</groupId>
+      <artifactId>rocketmq-common</artifactId>
+      <version>3.2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>3.4.8</version>
+    </dependency>
+    <!-- POI start -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.9</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2.2</version>
+    </dependency>
+    <!-- POI end -->
   </dependencies>
 
 
@@ -290,8 +325,7 @@
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
+          <include>**/*.*</include>
         </includes>
       </resource>
     </resources>
