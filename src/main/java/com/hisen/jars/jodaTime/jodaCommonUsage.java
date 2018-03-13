@@ -12,7 +12,7 @@ import org.junit.Test;
 public class jodaCommonUsage {
 
   private static final String FORMATE_DATE = "yyyy-MM-dd";
-  private static final String FORMATE_FULL = "yyyy-MM-dd HH:mm:ss EE";
+  private static final String FORMATE_FULL = "yyyy-MM-dd HH:mm:ss SSS EE";
   /**
    * 时间计算相关
    */
@@ -62,4 +62,14 @@ public class jodaCommonUsage {
         "\n10 天后 所在周的周一:" + dt.plusDays(10).dayOfWeek().withMinimumValue().toString(FORMATE_FULL));
   }
 
+  /**
+   * 获取当天开始的时间，结束时间
+   */
+  @Test
+  public void testTime(){
+    DateTime time = new DateTime();
+    String dayStart = time.withTimeAtStartOfDay().toString(FORMATE_FULL);
+    String dayEnd = time.millisOfDay().withMaximumValue().toString(FORMATE_FULL);
+    System.out.println("day start:"+dayStart+"\nday  end :"+dayEnd);
+  }
 }
