@@ -23,7 +23,8 @@ public class SecureUtil {
 
   @Test
   public void sha1Test() {
-    String test = "hisenyuan";
+    String test = "12106175|000000000014|702|3000|N|Khk3HqLXhj6BePZN07BNGFmPSEJ9vMsC";
+    System.out.println(test.substring(0,test.length()-1));
     try {
       System.out.println(getSHA1Str(test));
     } catch (NoSuchAlgorithmException e) {
@@ -85,7 +86,7 @@ public class SecureUtil {
         if (halfByte >= 0 && halfByte <= 9) {
           sb.append((char) (48 + halfByte));
         } else {
-          sb.append((char) 97 + (halfByte - 10));
+          sb.append((char) (97 + (halfByte - 10)));
         }
         halfByte = sha1Bytes[i] & 15;
       } while (two_halfs++ < 1);
