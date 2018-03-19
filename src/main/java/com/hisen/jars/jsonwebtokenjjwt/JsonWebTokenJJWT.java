@@ -1,7 +1,14 @@
 package com.hisen.jars.jsonwebtokenjjwt;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import org.joda.time.DateTime;
+import org.junit.Test;
 
 public class JsonWebTokenJJWT {
     // 密钥 通过各种加密方式也ok
@@ -20,7 +27,7 @@ public class JsonWebTokenJJWT {
                 .setNotBefore(new DateTime(System.currentTimeMillis() + 10000).toDate())
                 // 设置过期时间
                 .setExpiration(new DateTime(System.currentTimeMillis() + 600000).toDate())
-                // 存放各种业务数据 KV形式，类型不限
+                // 存放各种业务数据 KV形式，类型不限(请勿存放敏感信息)
                 .claim("hisenK", "hisenV")
                 .compact();
         // 输出token
@@ -39,6 +46,22 @@ public class JsonWebTokenJJWT {
         } catch (SignatureException e) {
             // 被串改或者超时，会抛出异常
             System.out.println(e);
+        }
+    }
+    @Test
+    public void testDecodeJwt(){
+        Base64.Decoder decoder = Base64.getDecoder();
+        String compactJws1 = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXNlbiIsImlhdCI6MTUxMjYyODUzNiwibmJmIjoxNTEyNjI4NTQ2LCJleHAiOjE1MTI2MjkxMzYsImhpc2VuSyI6Imhpc2VuViJ9.JKxvvYQyIJEN8Eg_6gN5NlnDokqVNApSd7eg3QGpjBfBARzx4ip4WRzSa0Ul2ScpdierKi9WxF1iTUdoHNRiaA";
+        String[] split = compactJws1.split("\\.");
+        System.out.println(split.length);
+        try {
+            String header = new String(decoder.decode(split[0]), "UTF-8");
+            String playload = new String(decoder.decode(split[1]), "UTF-8");
+            // signature无法解码，不是base64格式
+//            String  signature= new String(decoder.decode(split[2]), "UTF-8");
+            System.out.println("header decode:"+header+"\nplayload decode:"+playload);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 }
