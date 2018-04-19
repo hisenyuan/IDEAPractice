@@ -3,7 +3,6 @@ package com.hisen.collection.list.duplicate;
 import com.alibaba.rocketmq.shade.com.alibaba.fastjson.JSON;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -38,14 +37,18 @@ public class ListDuplicateTest {
     }
 
     /**
-     *
+     * 过滤方法
      * @param keyExtractor
      * @param <T>
      * @return
      */
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
-        return t -> seen.add(keyExtractor.apply(t));
+        ConcurrentHashMap<Object, Boolean> map = new ConcurrentHashMap<>(16);
+        return t -> map.putIfAbsent(keyExtractor.apply(t),Boolean.TRUE) == null;
+
+//        这个也可以，不过感觉效率要低一些，线程不是那么安全
+//        Set<Object> seen = ConcurrentHashMap.newKeySet();
+//        return t -> seen.add(keyExtractor.apply(t));
     }
 
     /**
