@@ -37,7 +37,7 @@ public class ListDuplicateTest {
     }
 
     /**
-     * 过滤方法
+     * 函数式接口 T -> bollean
      * @param keyExtractor
      * @param <T>
      * @return
