@@ -1,4 +1,4 @@
-package com.hisen.lambda;
+package com.hisen.java8inaction;
 
 /**
  * Created by hisenyuan on 2017/8/3 at 10:29.

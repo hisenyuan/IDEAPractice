@@ -1,4 +1,4 @@
-package com.hisen.lambda;
+package com.hisen.java8inaction;
 
 /**
  * 参考：http://www.jianshu.com/p/e7db8fddb8b4

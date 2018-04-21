@@ -1,4 +1,4 @@
-package com.hisen.lambda;
+package com.hisen.java8inaction;
 
 import java.util.function.Consumer;
 
