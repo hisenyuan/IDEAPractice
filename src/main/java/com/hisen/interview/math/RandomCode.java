@@ -11,7 +11,7 @@ package com.hisen.interview.math;
 public class RandomCode {
 
   public static void main(String[] args) {
-    System.out.print("为您生成的密码" + code(18));
+    System.out.print("为您生成的密码:" + code(18));
     //hisen();//判断随机数的范围
   }
 
@@ -22,13 +22,13 @@ public class RandomCode {
    * @return 生成的密码字符串
    */
   public static String code(int length) {
-    String s = "";
+    StringBuilder builder = new StringBuilder();
     for (int i = 0; i < length; i++) {
       //利用22~126的随机数，把ascii码转成字符拼接
       int random = 33 + (int) (Math.random() * 94);
-      s += (char) Integer.parseInt(String.valueOf(random));
+      builder.append((char) Integer.parseInt(String.valueOf(random)));
     }
-    return s;
+    return builder.toString();
   }
 
   /**
@@ -37,13 +37,10 @@ public class RandomCode {
   public static void hisen() {
     Boolean flag = true;
     int i = 0;
-    int f = 0;
     while (flag) {
-      System.out.println(f++);
       i = 33 + (int) (Math.random() * 94);
       // 希望得到 33~126的数字
       if (i == 33) {
-        System.out.println("====找到了");
         flag = false;
       }
     }
