@@ -23,7 +23,7 @@ public class GetBookInfomationFromDouban {
 
   @Test
   public void getBook(){
-    String bookInformation = getBookInformation("26665630");
+    String bookInformation = getBookInformation("26943161");
     logger.info("返回的json数据:"+bookInformation);
     Book book = JSON.parseObject(bookInformation, Book.class);
     logger.info("json数据转对象:"+JSON.toJSONString(book));
