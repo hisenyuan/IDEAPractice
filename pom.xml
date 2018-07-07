@@ -33,14 +33,6 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.8</version>
     </dependency>
-    <!--mysql数据库链接驱动-->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-Java</artifactId>
-      <version>5.1.38</version>
-      <type>pom</type>
-    </dependency>
-
     <!-- Spring MVC support -->
     <dependency>
       <groupId>org.springframework</groupId>
