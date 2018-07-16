@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import java.util.concurrent.*;
 
-public class TestThreadPoolExample {
-    private static org.apache.log4j.Logger LOGGER = Logger.getRootLogger();
+public class ThreadPoolExample {
+    private static Logger LOGGER = Logger.getRootLogger();
 
     @Test
     public void testThreadExample() {
