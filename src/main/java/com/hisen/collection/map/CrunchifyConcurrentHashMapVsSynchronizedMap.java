@@ -59,6 +59,33 @@ public class CrunchifyConcurrentHashMapVsSynchronizedMap {
      2500K entried added/retrieved in 1069 ms
      For class java.util.concurrent.ConcurrentHashMap the average time is 1703 ms
      */
+
+    /**
+     * update 2018年07月07日20:59:39 on MBP 2.9GHz
+     Test start for:class java.util.Hashtable
+     2500K entried added/retrieved in 1644 ms
+     2500K entried added/retrieved in 1818 ms
+     2500K entried added/retrieved in 1771 ms
+     2500K entried added/retrieved in 1775 ms
+     2500K entried added/retrieved in 2161 ms
+     For class java.util.Hashtable the average time is 1833 ms
+
+     Test start for:class java.util.Collections$SynchronizedMap
+     2500K entried added/retrieved in 1978 ms
+     2500K entried added/retrieved in 1780 ms
+     2500K entried added/retrieved in 1729 ms
+     2500K entried added/retrieved in 1700 ms
+     2500K entried added/retrieved in 1710 ms
+     For class java.util.Collections$SynchronizedMap the average time is 1779 ms
+
+     Test start for:class java.util.concurrent.ConcurrentHashMap
+     2500K entried added/retrieved in 525 ms
+     2500K entried added/retrieved in 512 ms
+     2500K entried added/retrieved in 579 ms
+     2500K entried added/retrieved in 493 ms
+     2500K entried added/retrieved in 486 ms
+     For class java.util.concurrent.ConcurrentHashMap the average time is 519 ms
+     */
   }
 
   private static void crunchifyPerformTest(Map<String, Integer> crunchifyThreads)
