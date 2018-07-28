@@ -1,3 +1,62 @@
+---
+title: WebSocket - Java & html & JavaScript - 单发 & 群发
+keywords: [websocket,java,java和websocket]
+date: 2018/07/28 15:40
+categories: java
+---
+
+## 一、背景说明
+最近在做app后台相关接口
+
+自建通知中心目前不能很好的支持给APP推送消息
+
+长连接可以保持推送速度，目前app中内嵌了H5，所以考虑使用websocket
+
+之前没有接触过websocket，百度了一堆之后，页面上可以正常使用
+
+但是没有发现可用使用Java后台进行消息的发送，于是乎就琢磨了一上午，解决了这个问题
+
+现在把这个小工程分享给大家，少走点弯路==
+
+ps：很多不能在后台发送消息，是因为缺少java的客户端
+
+## 二、准备工作
+建立一个maven web 工程
+
+添加依赖
+```
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neovisionaries</groupId>
+            <artifactId>nv-websocket-client</artifactId>
+            <version>1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+```
+
+## 三、主要代码
+websocket服务端主逻辑
+
+为了实现简单的非群发操作，在连接websocket的时候，加上了一些get参数
+
+例如：ws://localhost:8080/websocket?sendTo=hisen&method=methodSingle&user=hisenyuan
+
+然后在后端判断，根据参数做出不同的动作
+
+demo完整工程：https://github.com/hisenyuan/IDEAPractice/tree/master/websocket-demo
+
+配置完Tomcat，即可使用，在java后台运行测试类(com.hisen.ws.client.ClientApp4Java)可发送消息到页面
+
+```java
 package com.hisen.ws.server;
 
 import com.hisen.ws.util.Constants;
@@ -154,3 +213,4 @@ public class WebSocketServer {
         WebSocketServer.onlineCount--;
     }
 }
+```

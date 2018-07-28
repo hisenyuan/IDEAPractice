@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ClientApp4Web - hisen</title>
+    <title>ClientApp4Web - hisenyuan</title>
 </head>
 <body>
-Welcome hisen<br/><input id="text" type="text"/>
+Welcome hisenyuan<br/><input id="text" type="text"/>
 <button onclick="send()">发送消息</button>
 <hr/>
 <button onclick="closeWebSocket()">关闭WebSocket连接</button>
@@ -17,7 +17,7 @@ Welcome hisen<br/><input id="text" type="text"/>
     var websocket = null;
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8080/websocket?user=hisen");
+        websocket = new WebSocket("ws://localhost:8080/websocket?user=hisenyuan");
     }
     else {
         alert('当前浏览器 Not support websocket')

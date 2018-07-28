@@ -20,16 +20,17 @@ public class ClientApp4Java {
      * @throws InterruptedException
      */
     @Test
-    public void test() throws IOException, WebSocketException, InterruptedException {
+    public void testClientApp4Java() throws IOException, WebSocketException, InterruptedException {
         HashMap<String, String> params = new HashMap<>();
         params.put(Constants.METHOD, Constants.METHOD_SINGLE);
-        params.put(Constants.USER, "hisenyuan");
+        params.put(Constants.USER, "ClientApp4Java");
         params.put(Constants.SEND_TO, "hisen");
         String url = "ws://localhost:8080/websocket?";
-
+        String uri = url + getStrFromMap(params);
+        System.out.println(uri);
         WebSocket websocket = new WebSocketFactory()
                 // 发送地址和参数
-                .createSocket(url + getStrFromMap(params))
+                .createSocket(uri)
                 // 新增一个监听者
                 .addListener(new WebSocketAdapter() {
                     @Override
