@@ -36,6 +36,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>5.0.0.alpha2</version>
+    </dependency>
 
 
     </dependencies>
