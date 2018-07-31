@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ClientApp4Web - hisen</title>
+</head>
+<body>
+<div id="content" class="row-center">
+    最新消息:<div id="chat-box" class="row-center">
+    </div>
+    <hr />
+    <div id="input-box">
+        用户账号:<input id="myid" placeholder="myid">
+        <button id="login-button" onclick="login()">登录</button>
+        <hr />
+        接收用户:<input id="friendid" placeholder="friendid">
+        <br />
+        输入消息:<input class="chat-input" id="chat-input" placeholder="message"/>
+        <button class="chat-button" id="send" onclick="send()">发送</button>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+    //新建socket对象 注意修改自己的ip地址，本页面可以直接在文件管理器打开，即可生效
+    window.socket = new WebSocket("ws://10.10.20.17:9999/ws");
+    //监听netty服务器消息并打印到页面上
+    socket.onmessage = function (event) {
+        var datas = event.data.split(",");
+        console.log("服务器消息====" + datas);
+        $("#chat-box").text(datas);
+    }
+
+    //将发送人接收人的id和要发生的消息发送出去
+    function send() {
+        console.log($("#chat-input").val())
+        var data = $("#myid").val() + "," + $("#friendid").val() + "," + $("#chat-input").val()
+        socket.send(data)
+    }
+
+    //登录事件
+    function login() {
+        var data = $("#myid").val();
+        socket.send(data);
+    }
+</script>
+</html>
