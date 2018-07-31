@@ -1,5 +1,6 @@
 package com.hisen.netty;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -8,6 +9,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.stream.ChunkedWriteHandler;
+
+import java.util.concurrent.*;
 
 
 /**
@@ -24,7 +27,7 @@ public class NettyWebSocketServer {
     public NettyWebSocketServer(int port) {
     }
 
-    public void run(){
+    public void run() {
         try {
             //创建ServerBootstrap实例
             ServerBootstrap b = new ServerBootstrap();
@@ -34,7 +37,7 @@ public class NettyWebSocketServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch){
+                        public void initChannel(SocketChannel ch) {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast("http-codec", new HttpServerCodec());
                             // Http消息组装
@@ -63,8 +66,29 @@ public class NettyWebSocketServer {
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
+        /**
+         * 普通版
+         */
+        /* new NettyWebSocketServer(port).run(); */
+
+        /**
+         * 线程池版本
+         */
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("ws").build();
+        ExecutorService singleThreadPool = new ThreadPoolExecutor(
+                1,
+                1,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024),
+                namedThreadFactory,
+                new ThreadPoolExecutor.AbortPolicy());
+        // 使用线程，避免阻塞后面的逻辑处理
+        singleThreadPool.execute(() -> new NettyWebSocketServer(port).run());
+        singleThreadPool.shutdown();
+
+        // 如果使用普通版，这个日志永远不会打印
         System.out.println("NettyWebSocketServer start!");
-        new NettyWebSocketServer(port).run();
     }
 }
