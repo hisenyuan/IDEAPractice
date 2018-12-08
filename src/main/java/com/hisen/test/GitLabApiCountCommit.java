@@ -31,7 +31,7 @@ public class GitLabApiCountCommit {
 
     private final static String PER_PAGE_SIZE = "50";
 
-    private final static String BASE_URL = "http://git.unpay.com/api/v4";
+    private final static String BASE_URL = "http://git.hisenyuan.com/api/v4";
 
     private final static String PROJECTS = "/projects";
     private final static String USERS = "/users";
