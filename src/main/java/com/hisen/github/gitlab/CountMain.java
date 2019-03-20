@@ -35,7 +35,7 @@ public class CountMain {
 
     private static void printCounTable(List<Commit> commitBeanList) {
         final Map<String, List<Commit>> nameListMap = commitBeanList.stream().collect(Collectors.groupingBy(Commit::getAuthor_name));
-        System.out.printf("%-50s%-20s%-20s%-20s%-20s\n", "user", "additions", "deletions", "total", "effective");
+        System.out.printf("%-50s%-25s%-25s%-25s%-25s\n", "user", "additions", "deletions", "total", "effective");
         for (Map.Entry<String, List<Commit>> entry : nameListMap.entrySet()) {
             final String user = entry.getKey();
             final List<Commit> commits = entry.getValue();
@@ -43,7 +43,7 @@ public class CountMain {
             final int deletions = commits.stream().map(Commit::getDeletions).mapToInt(Integer::intValue).sum();
             final int total = additions + deletions;
             final int effective = additions - deletions;
-            System.out.printf("%-50s%-20s%-20s%-20s%-20s\n", user, additions, deletions, total, effective);
+            System.out.printf("%-50s%-25s%-25s%-25s%-25s\n", user, additions, deletions, total, effective);
         }
     }
 
