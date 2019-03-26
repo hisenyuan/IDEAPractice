@@ -4,7 +4,7 @@ import java.util.StringTokenizer;
 
 /**
  * @Author hisenyuan
- * @Description 计算长度最大的子串长度(按空格分割),自定义实现比较优
+ * @Description 计算长度最大的子串长度(按空格分割), 自定义实现比较优
  * @Date 2019/3/26 20:53
  */
 public class TestStringTokenizer {
@@ -26,8 +26,17 @@ public class TestStringTokenizer {
         }
         final long end2 = System.nanoTime();
 
+        // 利用 Split
+        final long start3 = System.nanoTime();
+        for (int i = 0; i < times; i++) {
+            String splitStr = " ";
+            findMaxLength4Split(oriStr, splitStr);
+        }
+        final long end3 = System.nanoTime();
+
         System.out.println("use(nano): " + (end1 - start1) + ", by findMaxLength");
         System.out.println("use(nano): " + (end2 - start2) + ", by findMaxLength4StringTokenizer");
+        System.out.println("use(nano): " + (end3 - start3) + ", by findMaxLength4Split");
 //        output
 //        use(nano): 14323730, by findMaxLength
 //        use(nano): 69220102, by findMaxLength4StringTokenizer
@@ -52,6 +61,16 @@ public class TestStringTokenizer {
             int currLength = currentIndex - index;
             maxLength = currLength > maxLength ? currLength : maxLength;
             index = currentIndex + splitStr.length();
+        }
+//        System.out.println("max: " + maxLength);
+    }
+
+    private static void findMaxLength4Split(String oriStr, String splitStr) {
+        int maxLength = 0;
+        final String[] strings = oriStr.split(splitStr);
+        for (String str : strings) {
+            final int length = str.length();
+            maxLength = length > maxLength ? length : maxLength;
         }
 //        System.out.println("max: " + maxLength);
     }
