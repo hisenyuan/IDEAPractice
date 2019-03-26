@@ -38,8 +38,9 @@ public class TestStringTokenizer {
         System.out.println("use(nano): " + (end2 - start2) + ", by findMaxLength4StringTokenizer");
         System.out.println("use(nano): " + (end3 - start3) + ", by findMaxLength4Split");
 //        output
-//        use(nano): 14323730, by findMaxLength
-//        use(nano): 69220102, by findMaxLength4StringTokenizer
+//        use(nano): 15486049, by findMaxLength
+//        use(nano): 66060102, by findMaxLength4StringTokenizer
+//        use(nano): 80844275, by findMaxLength4Split
     }
 
     private static void findMaxLength4StringTokenizer(String oriStr) {
