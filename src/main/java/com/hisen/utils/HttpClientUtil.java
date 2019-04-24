@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -104,7 +105,7 @@ public class HttpClientUtil {
     }
 
     public static String sendPost(String url, Map<String, String> data,
-            Map<String, String> header) {
+                                  Map<String, String> header) {
         String responseContent = null;
         try {
             HttpClient client = HttpClientBuilder.create().build();
@@ -162,6 +163,9 @@ public class HttpClientUtil {
     }
 
     public static String getGetParamByMap(Map<String, String> getParamMap) {
+        if (null == getParamMap || getParamMap.isEmpty()) {
+            return "";
+        }
         String getParamStr = getParamMap.entrySet()
                 .stream()
                 .filter((entry) -> !StringUtils.isEmpty(entry.getValue()))

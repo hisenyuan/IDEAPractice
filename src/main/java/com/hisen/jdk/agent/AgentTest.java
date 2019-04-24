@@ -39,4 +39,22 @@ public class AgentTest {
         Fruit orange = (Fruit) DynamicAgent.agent(Fruit.class, new Orange());
         orange.show();
     }
+
+//===CGlibAgentTest===
+//-> before invoking
+//Apple show method is invoked
+//-> after invoking
+//
+//-> before invoking
+//    Orange show method is invoked
+//-> after invoking
+//
+//===JDKDynamicAgentTest===
+//            -> before invoking
+//    Apple show method is invoked
+//-> after invoking
+//
+//-> before invoking
+//    Orange show method is invoked
+//-> after invoking
 }

@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 public class Html2Image {
   public static void main(String[] args) throws Exception {
     //load the webpage into the editor
-    JEditorPane ed = new JEditorPane(new URL("http://www.baidu.com"));
+    JEditorPane ed = new JEditorPane(new URL("http://hisen.me"));
     Thread.sleep(10000);
     ed.setSize(1000,1000);
     //create a new image

@@ -32,7 +32,7 @@ public class Bfs {
         List<String> jonnyv = new ArrayList<>();
         map.put("jonny", jonnyv);
 
-        LinkedList<String> queue = new LinkedList();
+        LinkedList<String> queue = new LinkedList<>();
         map.get(name).forEach(queue::addFirst);
         // 已经检查过
         List<String> searched = new ArrayList<>();

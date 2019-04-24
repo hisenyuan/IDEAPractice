@@ -1,4 +1,4 @@
-package com.hisen.interview.tiger20171110;
+package com.hisen.interview;
 
 /**
  * @author : yhx
@@ -7,15 +7,16 @@ package com.hisen.interview.tiger20171110;
  */
 public class MultithreadingSingleton {
 
-    private static MultithreadingSingleton singleton = null;
+    // 保证可见性
+    private static volatile MultithreadingSingleton singleton = null;
 
-    private static boolean flag = false;
+    private static volatile boolean flag = false;
 
     // 必须指定为私有方法，否则可以直接new对象
     private MultithreadingSingleton() {
         // 防止被反射；并且保证过程是线程安全的
         synchronized (MultithreadingSingleton.class) {
-            if (false == flag) {
+            if (!flag) {
                 flag = true;
             } else {
                 throw new RuntimeException("禁止反射！");

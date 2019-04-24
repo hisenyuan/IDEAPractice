@@ -13,7 +13,7 @@ import java.util.UUID;
 public class FindLucklyOne {
     public static void main(String[] args) {
         List<String> person = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H");
-        ArrayList<String> lucklys = new ArrayList<>();
+        List<String> lucklys = new ArrayList<>();
         for (int i = 0; i < person.size() * 50; i++) {
             if (i % 8 == 0){
                 System.out.println("=================");
@@ -22,7 +22,13 @@ public class FindLucklyOne {
         }
     }
 
-    private static void findLucklyOneByHashCode(List<String> person, ArrayList<String> lucklys) {
+    /**
+     *
+     * @param person 目前所有的人
+     * @param lucklys 这一轮已经值班了的人
+     */
+
+    private static void findLucklyOneByHashCode(List<String> person, List<String> lucklys) {
         List<String> result = new ArrayList<>(person);
         result.removeAll(lucklys);
         if (result.size() == 0) {

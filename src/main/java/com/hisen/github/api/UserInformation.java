@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 public class UserInformation {
 
   public static void main(String[] args) {
-    String user = "hisen-yuan";
+    String user = "hisenyuan";
     String userUrl = "https://api.github.com/users/" + user;
     String reposUrl = "https://api.github.com/users/" + user + "/repos";
 

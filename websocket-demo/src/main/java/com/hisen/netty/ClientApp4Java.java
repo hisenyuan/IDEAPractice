@@ -20,7 +20,7 @@ public class ClientApp4Java {
     public void testClientApp4Java() throws IOException, WebSocketException {
         WebSocket websocket = new WebSocketFactory()
                 // 发送地址和参数
-                .createSocket("ws://10.10.20.17:9999/ws")
+                .createSocket("ws://10.1.1.157:9999/ws")
                 // 新增一个监听者
                 .addListener(new WebSocketAdapter() {
                     @Override

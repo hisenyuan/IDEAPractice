@@ -1,6 +1,6 @@
 package com.hisen.test;
 
-import com.hisen.interview.tiger20171110.MultithreadingSingleton;
+import com.hisen.interview.MultithreadingSingleton;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

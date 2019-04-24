@@ -2,6 +2,7 @@ package com.hisen.jars.redisson;
 
 import com.hisen.utils.JedisUtil;
 import org.redisson.Redisson;
+import org.redisson.api.RList;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import redis.clients.jedis.Jedis;
@@ -19,6 +20,8 @@ public class RedissonUtil {
 
   public static RedissonClient getClient() {
     if (client == null){
+      final RList<String> hisen = client.getList("hisen");
+      hisen.add("1");
       Config config = new Config();
       config.useSingleServer().setAddress(url);
       client = Redisson.create(config);

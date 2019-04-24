@@ -1,5 +1,7 @@
 package com.hisen.interview.math;
 
+import java.util.Arrays;
+
 public class MaopaoSort {
 
   public static void main(String[] args) {
@@ -17,8 +19,6 @@ public class MaopaoSort {
       }
     }
     //输出排序之后的数组
-    for (int i = 0; i < hisen.length; i++) {
-      System.out.println(hisen[i]);
-    }
+    System.out.println(Arrays.toString(hisen));
   }
 }

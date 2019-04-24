@@ -3,6 +3,7 @@ package com.hisen.nio.copyFile;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -15,18 +16,9 @@ public class NIOCopy {
     public void testCopy() {
         String oldFileName = "/Users/hisenyuan/hisen/blog/source/_posts/Test-Java-Code.md";
         String newFileName = "/Users/hisenyuan/hisen/test/Test-Java-Code.md";
-//        nioCopy(oldFileName, newFileName);
-//        ioCopy(oldFileName, newFileName.replace("c", "d"));
-        ioCopyByLine(oldFileName,newFileName);
-        /**
-         * 得出的数据很诡异，为什么NIO会比IO的时间还要长？
-         *
-         * 文件大小为：869269504 byte
-         * NIO方式复制完成，耗时 9 秒
-         *
-         * 文件大小为：869269504 byte
-         * IO方式复制完成，耗时 7 秒
-         */
+        nioCopy(oldFileName, newFileName);
+        ioCopy(oldFileName, newFileName.replace(".md", ".md.bak"));
+        ioCopyByLine(oldFileName,newFileName.replace(".md",".bak." + System.currentTimeMillis()));
     }
 
     /**

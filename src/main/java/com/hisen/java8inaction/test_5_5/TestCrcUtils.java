@@ -12,7 +12,7 @@ import org.junit.Test;
  * @time 2018/4/21 16:35
  * @description
  */
-public class TestMain {
+public class TestCrcUtils {
     @Test
     public void test55(){
         Trader raoul = new Trader("Raoul", "Cambridge");
