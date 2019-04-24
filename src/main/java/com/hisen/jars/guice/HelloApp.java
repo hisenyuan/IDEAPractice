@@ -12,14 +12,11 @@ import org.junit.Test;
  * @Date 2019/4/24 16:13
  */
 public class HelloApp {
-    @Inject
-    private HelloService service;
 
     @Test
     public void testSayHello() {
         Injector injector = Guice.createInjector();
         HelloService helloService = injector.getInstance(HelloService.class);
         helloService.sayHello("hisen");
-        service.sayHello("hisen2");
     }
 }
