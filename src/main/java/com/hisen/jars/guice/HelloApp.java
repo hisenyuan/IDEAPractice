@@ -1,7 +1,6 @@
 package com.hisen.jars.guice;
 
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.hisen.jars.guice.service.HelloService;
 import org.junit.Test;
