@@ -13,12 +13,10 @@ import java.lang.reflect.Method;
  * @Date 2019/3/29 23:37
  */
 public class CGlibAgent implements MethodInterceptor {
-    private Object proxy;
 
-    public Object getInstance(Object proxy) {
-        this.proxy = proxy;
+    public Object getInstance(Class clazz) {
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(this.proxy.getClass());
+        enhancer.setSuperclass(clazz);
         // 回调方法
         enhancer.setCallback(this);
         // 创建代理对象

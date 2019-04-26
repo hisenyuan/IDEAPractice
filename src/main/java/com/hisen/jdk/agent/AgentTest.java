@@ -20,12 +20,12 @@ public class AgentTest {
 
     private static void cGlibAgentTest() {
         CGlibAgent cGlibAgent = new CGlibAgent();
-        Apple apple = (Apple) cGlibAgent.getInstance(new Apple());
+        Apple apple = (Apple) cGlibAgent.getInstance(Apple.class);
         apple.show();
 
         System.out.println();
 
-        Orange orange = (Orange) cGlibAgent.getInstance(new Orange());
+        Orange orange = (Orange) cGlibAgent.getInstance(Orange.class);
         orange.show();
     }
 
