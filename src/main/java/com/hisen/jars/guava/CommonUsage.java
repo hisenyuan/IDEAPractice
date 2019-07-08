@@ -120,8 +120,8 @@ public class CommonUsage {
 //    Files.createParentDirs(File) 创建父级目录
 //    getChecksum(File)获得文件的checksum
 //    hash(File)获得文件的hashmap系列方法获得文件的内存映射
-//    getFileExtension(String)获得文件的扩展名
-//    getNameWithoutExtension(String file)获得不带扩展名的文件名
+//    getFileExtension(string)获得文件的扩展名
+//    getNameWithoutExtension(string file)获得不带扩展名的文件名
   }
 
   /**

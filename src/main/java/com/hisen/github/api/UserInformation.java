@@ -26,15 +26,15 @@ public class UserInformation {
     /*
     System.out.println("fastjson无序遍历结果：");
     for (Object jsonObj:jsonArray){
-      for (Map.Entry<String, Object> entry : JSON.parseObject(jsonObj.toString()).entrySet()) {
+      for (Map.Entry<string, Object> entry : JSON.parseObject(jsonObj.toString()).entrySet()) {
         System.out.println(entry.getKey() + ":" + entry.getValue());
       }
     }
     System.out.println("-------------------");
     for (Object jsonObj:jsonArray){
       System.out.println("fastjson有序遍历结果：");
-      LinkedHashMap<String, String> jsonMap = JSON.parseObject(jsonObj.toString(),new TypeReference<LinkedHashMap<String, String>>() {});
-      for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+      LinkedHashMap<string, string> jsonMap = JSON.parseObject(jsonObj.toString(),new TypeReference<LinkedHashMap<string, string>>() {});
+      for (Map.Entry<string, string> entry : jsonMap.entrySet()) {
         System.out.println(entry.getKey() + ":" + entry.getValue());
       }
     }
@@ -61,15 +61,15 @@ public class UserInformation {
     /*
     System.out.println("fastjson无序遍历结果：");
     JSONObject jsonObj = JSON.parseObject(githubUerInformation);
-    for (Map.Entry<String, Object> entry : jsonObj.entrySet()) {
+    for (Map.Entry<string, Object> entry : jsonObj.entrySet()) {
       System.out.println(entry.getKey() + ":" + entry.getValue());
     }
     System.out.println("-------------------");
     System.out.println("fastjson有序遍历结果：");
-    LinkedHashMap<String, String> jsonMap = JSON
-        .parseObject(githubUerInformation, new TypeReference<LinkedHashMap<String, String>>() {
+    LinkedHashMap<string, string> jsonMap = JSON
+        .parseObject(githubUerInformation, new TypeReference<LinkedHashMap<string, string>>() {
         });
-    for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+    for (Map.Entry<string, string> entry : jsonMap.entrySet()) {
       System.out.println(entry.getKey() + ":" + entry.getValue());
     }
     */

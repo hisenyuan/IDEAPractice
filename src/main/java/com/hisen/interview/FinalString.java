@@ -13,7 +13,7 @@ public class FinalString {
 
   public FinalString setHost(String host) {
     this.host = host;
-//    System.out.println("A setHost:"+this.service);
+//    System.out.println("A setHost:"+this.services);
 //    System.out.println("A setHost:"+this.host);
     return this;
   }

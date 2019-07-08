@@ -1,4 +1,4 @@
-package com.hisen.String;
+package com.hisen.string;
 
 import com.hisen.utils.Base64Util;
 import java.io.BufferedWriter;
@@ -34,7 +34,7 @@ public class String2Base64 {
   }
 
   public static void str2File(String str) {
-    String path = "src/main/java/com/hisen/String/text/str2File1.txt";
+    String path = "src/main/java/com/hisen/string/text/str2File1.txt";
     File file = new File(path);
     if (!file.exists()) {
       File parent = file.getParentFile();

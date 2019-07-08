@@ -3,6 +3,7 @@ package com.hisen.github.gitlab;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.junit.Test;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -52,14 +53,14 @@ public class CountMain {
         List<Commit> commitBeanList = new ArrayList<>();
         List<Integer> projectIdList = handleProjects(since, until);
 
-        Map<Integer,Future<List<Commit>>> commitFutureMap = new HashMap<>();
+        Map<Integer, Future<List<Commit>>> commitFutureMap = new HashMap<>();
 
         ExecutorService pool = getThreadPool();
 
         for (Integer projectId : projectIdList) {
             final GetCommitsCallable gcc = new GetCommitsCallable(projectId, since, until);
             final Future<List<Commit>> commitsFuture = pool.submit(gcc);
-            commitFutureMap.put(projectId,commitsFuture);
+            commitFutureMap.put(projectId, commitsFuture);
         }
 
         pool.shutdown();
@@ -133,4 +134,6 @@ public class CountMain {
         }
         return projectIdList;
     }
+
+
 }

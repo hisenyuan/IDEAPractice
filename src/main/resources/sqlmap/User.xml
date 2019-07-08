@@ -58,7 +58,7 @@ ${value}：接收输入参数的内容，如果传入类型是简单类型，${}
         首先通过uuid()得到主键，将主键设置到user对象的id属性中
         其次在insert执行时，从user对象中取出id属性值
          -->
-    <!--  <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <!--  <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.string">
         SELECT uuid()
     </selectKey>
     insert into user(id,username,birthday,sex,address) value(#{id},#{username},#{birthday},#{sex},#{address}) -->

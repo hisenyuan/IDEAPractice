@@ -1,4 +1,4 @@
-package com.hisen.String.stock;
+package com.hisen.string.stock;
 
 import java.io.BufferedReader;
 import java.io.IOException;

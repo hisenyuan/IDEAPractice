@@ -58,7 +58,7 @@ public class JsonWebTokenJJWT {
             String header = new String(decoder.decode(split[0]), "UTF-8");
             String playload = new String(decoder.decode(split[1]), "UTF-8");
             // signature无法解码，不是base64格式
-//            String  signature= new String(decoder.decode(split[2]), "UTF-8");
+//            string  signature= new string(decoder.decode(split[2]), "UTF-8");
             System.out.println("header decode:"+header+"\nplayload decode:"+playload);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

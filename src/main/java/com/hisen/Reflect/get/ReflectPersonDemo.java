@@ -69,7 +69,7 @@ public class ReflectPersonDemo {
       constructor.setAccessible(true);
       constructor.newInstance("hisen");
       //Class的newInstance方法，只能创建只包含无参数的构造函数的类，有参数用下面的
-      //fromClass.getDeclaredConstructor(String.class).newInstance(“tengj”);
+      //fromClass.getDeclaredConstructor(string.class).newInstance(“tengj”);
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -23,7 +23,7 @@ public class addFont extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String c = request.getParameter("a");
+        string c = request.getParameter("a");
         System.out.println(c);
         System.out.println("==========================");
         if("yes".equals(c))
@@ -37,14 +37,14 @@ public class addFont extends HttpServlet {
         System.out.println("浏览器"+browser+" 版本"+browserVersion);
         OperatingSystem os = userAgent.getOperatingSystem();
 
-        String ip = "";
+        string ip = "";
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         System.out.println("ip   "+ip);
-        String s = " 系统:"+os+" IP:"+ip+"\n浏览器:"+browser+" 版本:"+browserVersion;
+        string s = " 系统:"+os+" IP:"+ip+"\n浏览器:"+browser+" 版本:"+browserVersion;
         System.out.println(s);
         addFont.imageAddFont(s,"c:/1/830.jpg");
     }

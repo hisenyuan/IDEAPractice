@@ -1,4 +1,4 @@
-package com.hisen.String;
+package com.hisen.string;
 
 public class StringSpecharsHandle {
 
@@ -10,7 +10,7 @@ public class StringSpecharsHandle {
   /**
    * 特殊字符处理，比如：“\A1;1300”
    *
-   * @return String
+   * @return string
    */
   public static String string2Json(String s) {
     StringBuffer sb = new StringBuffer();

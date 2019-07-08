@@ -1,4 +1,4 @@
-package com.hisen.String.split;
+package com.hisen.string.split;
 
 /**
  * 手机号中间四位脱敏

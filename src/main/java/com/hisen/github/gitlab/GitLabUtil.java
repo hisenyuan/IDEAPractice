@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class GitLabUtil {
     /**
-     * @return java.lang.String
+     * @return java.lang.string
      * @Author hisenyuan
      * @Description 获取项目下面所有的commit
      * @Date 2018/12/6 20:26
@@ -40,7 +40,7 @@ public class GitLabUtil {
     }
 
     /**
-     * @return java.lang.String
+     * @return java.lang.string
      * @Author hisenyuan
      * @Description 获取工程列表，一般不限制【工程创建】开始结束时间比较好
      * @Date 2018/12/6 20:26
@@ -61,7 +61,7 @@ public class GitLabUtil {
     }
 
     /**
-     * @return java.lang.String
+     * @return java.lang.string
      * @Author hisenyuan
      * @Description 获取用户列表
      * @Date 2018/12/6 20:26

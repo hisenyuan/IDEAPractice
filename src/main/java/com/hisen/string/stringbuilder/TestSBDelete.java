@@ -1,4 +1,4 @@
-package com.hisen.String.stringbuilder;
+package com.hisen.string.stringbuilder;
 
 import org.junit.Test;
 

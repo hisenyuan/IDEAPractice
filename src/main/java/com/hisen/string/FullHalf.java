@@ -1,4 +1,4 @@
-package com.hisen.String;
+package com.hisen.string;
 
 /**
  * 半角字符和全角字符的转换 以及 判断
