@@ -17,7 +17,7 @@ import java.util.List;
  * @author hisenyuan
  * @date 2020-09-26 14:49
  */
-public class CopySmallerUtils {
+public class CopyLimitedPropertiesUtil {
     public static void main(String[] args) {
         Order order = getOrder();
         Order smallerOrder = new Order();
@@ -26,7 +26,7 @@ public class CopySmallerUtils {
         keepFields.add("address.province");
         // i want get all names, not only index 1, how to do ?
         keepFields.add("productInfos[1].name");
-        copyProperties(order, smallerOrder, keepFields);
+        copyLimitedProperties(order, smallerOrder, keepFields);
         Gson gson = new Gson();
         System.out.println("src:" + gson.toJson(order));
         System.out.println("des" + gson.toJson(smallerOrder));
@@ -41,7 +41,7 @@ public class CopySmallerUtils {
      * @param dst
      * @param fields
      */
-    private static void copyProperties(Order src, Order dst, List<String> fields) {
+    private static void copyLimitedProperties(Order src, Order dst, List<String> fields) {
         BeanWrapper srcWarp = PropertyAccessorFactory.forBeanPropertyAccess(src);
         BeanWrapper dstWarp = PropertyAccessorFactory.forBeanPropertyAccess(dst);
         dstWarp.setAutoGrowCollectionLimit(10);
